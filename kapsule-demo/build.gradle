@@ -2,9 +2,10 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'space.traversal.kapsule.demo.DemoKt'
+mainClassName = 'net.gouline.kapsule.demo.DemoKt'
 
 dependencies {
-    compile project(':library')
+    compile project(':kapsule-library')
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
