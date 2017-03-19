@@ -12,7 +12,7 @@ import kotlin.reflect.KProperty
  */
 class Delegate<in M, T>(private val initializer: M.() -> T, private val required: Boolean = false) {
 
-    private var value: T? = null
+    internal var value: T? = null
 
     /**
      * Initializes value from the injection module.

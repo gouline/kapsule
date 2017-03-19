@@ -5,7 +5,7 @@ plugins {
 mainClassName = 'net.gouline.kapsule.demo.DemoKt'
 
 dependencies {
-    compile project(':kapsule-library')
+    compile project(':kapsule-core')
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
