@@ -4,3 +4,5 @@ dependencies {
     testCompile "junit:junit:$junit_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
 }
+
+apply from: '../gradle/publishing.gradle'
