@@ -10,7 +10,7 @@ import kotlin.reflect.KProperty
  * @param initializer Value initializer function.
  * @param required True for required (non-null), otherwise optional (nullable).
  */
-class Delegate<in M, T>(private val initializer: M.() -> T, private val required: Boolean = false) {
+class Delegate<in M, T>(internal val initializer: M.() -> T, internal val required: Boolean = false) {
 
     internal var value: T? = null
 

@@ -2,6 +2,8 @@ package net.gouline.kapsule
 
 import junit.framework.TestCase
 import org.junit.Test
+import org.mockito.Mockito
+import kotlin.reflect.KProperty
 
 /**
  * Test case for [Delegate].
@@ -10,31 +12,70 @@ class DelegateTestCase : TestCase() {
 
     @Test fun testInitialize_required() {
         val delegate = Delegate<RequiredModule, String>({ value }, true)
-        assert(delegate.value == null)
+        assertEquals(null, delegate.value)
 
-        val module1 = RequiredModule("one")
-        delegate.initialize(module1)
-        assertEquals(module1.value, delegate.value)
-
-        val module2 = RequiredModule("two")
-        delegate.initialize(module2)
-        assertEquals(module2.value, delegate.value)
+        listOf("one", "two").forEach { value ->
+            val module = RequiredModule(value)
+            delegate.initialize(module)
+            assertEquals(value, delegate.value)
+        }
     }
 
     @Test fun testInitialize_optional() {
-        val delegate = Delegate<OptionalModule, String?>({ value }, true)
-        assert(delegate.value == null)
+        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        assertEquals(null, delegate.value)
 
-        val module1 = OptionalModule(null)
-        delegate.initialize(module1)
-        assertEquals(module1.value, delegate.value)
-
-        val module2 = OptionalModule("three")
-        delegate.initialize(module2)
-        assertEquals(module2.value, delegate.value)
+        listOf(null, "three").forEach { value ->
+            val module = OptionalModule(value)
+            delegate.initialize(module)
+            assertEquals(value, delegate.value)
+        }
     }
 
-    class RequiredModule(val value: String)
+    @Test fun testGetValue_required() {
+        val delegate = Delegate<RequiredModule, String>({ value }, true)
+        val prop = Mockito.mock(KProperty::class.java)
 
-    class OptionalModule(val value: String?)
+        try {
+            delegate.getValue(null, prop)
+            assertTrue(false)
+        } catch (e: KotlinNullPointerException) {
+            assertTrue(true)
+        }
+
+        val expected = "test1"
+        delegate.value = expected
+        assertEquals(expected, delegate.getValue(null, prop))
+    }
+
+    @Test fun testGetValue_optional() {
+        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        val prop = Mockito.mock(KProperty::class.java)
+
+        assertEquals(null, delegate.getValue(null, prop))
+
+        val expected = "test2"
+        delegate.value = expected
+        assertEquals(expected, delegate.getValue(null, prop))
+    }
+
+    @Test fun testSetValue_required() {
+        val delegate = Delegate<RequiredModule, String>({ value }, true)
+        val prop = Mockito.mock(KProperty::class.java)
+
+        listOf("test3", "test4").forEach { expected ->
+            delegate.setValue(null, prop, expected)
+            assertEquals(expected, delegate.value)
+        }
+    }
+
+    @Test fun testSetValue_optional() {
+        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        val prop = Mockito.mock(KProperty::class.java)
+
+        listOf("test3", null).forEach { expected ->
+            delegate.setValue(null, prop, expected)
+            assertEquals(expected, delegate.value)
+        }
+    }
 }

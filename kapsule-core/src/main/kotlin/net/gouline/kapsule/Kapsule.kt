@@ -7,7 +7,7 @@ package net.gouline.kapsule
  */
 class Kapsule<M> {
 
-    private val delegates = mutableListOf<Delegate<M, *>>()
+    internal val delegates = mutableListOf<Delegate<M, *>>()
 
     /**
      * Initializes property delegates with provided functions.
