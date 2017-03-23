@@ -1,63 +1,27 @@
 package net.gouline.kapsule.demo
 
 import net.gouline.kapsule.Kapsule
+import net.gouline.kapsule.demo.di.DemoModule
 
 fun main(args: Array<String>) {
-    val act = Activity()
+    val demo = Demo(Context())
+    println("First name: ${demo.firstName}")
+    println("Last name: ${demo.lastName}")
+    println("Emails: ${demo.emails}")
 }
 
-object Application {
-
-    val module = DemoModule(
-            id = MainIdModule(),
-            url = MainUrlModule())
-
-    val testModule = DemoModule(
-            id = TestIdModule(),
-            url = MainUrlModule())
-}
-
-class Activity {
+/**
+ * Demo app definition.
+ */
+class Demo(context: Context) {
 
     private val kap = Kapsule<DemoModule>()
 
-    var id by kap.opt<Int?> { id }
-    val name by kap<String> { name }
-    val url by kap<String> { url }
+    val firstName by kap { firstName }
+    val lastName by kap.opt { lastName }
+    val emails by kap { emails }
 
     init {
-        kap.inject(Application.module)
-        println("act1: $id, $name, $url")
-
-        id = null
-        println("act2: $id, $name, $url")
-
-        kap.inject(Application.testModule)
-        println("act3: $id, $name, $url")
+        kap.inject(context.module)
     }
-}
-
-class DemoModule(id: IdModule, url: UrlModule) : IdModule by id, UrlModule by url
-
-interface IdModule {
-    val id: Int
-    val name: String
-}
-
-interface UrlModule {
-    val url: String
-}
-
-class MainIdModule : IdModule {
-    override val id = 42
-    override val name = "Developer"
-}
-
-class MainUrlModule : UrlModule {
-    override val url = "https://github.com"
-}
-
-class TestIdModule : IdModule {
-    override val id = 24
-    override val name = "Tester"
 }

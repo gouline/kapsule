@@ -16,7 +16,13 @@ buildscript {
     }
 }
 
-allprojects {
+subprojects {
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+
     apply plugin: 'kotlin'
 
     repositories {

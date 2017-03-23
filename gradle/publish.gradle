@@ -33,49 +33,48 @@ dokka {
     }
 }
 
-if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+if (hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
     uploadArchives {
         repositories {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                pom.groupId = GROUP
-                pom.artifactId = project.name
-                pom.version = VERSION_NAME
+                pom.groupId = property('publish.groupId')
+                pom.artifactId = property('publish.artifactId')
+                pom.version = property('publish.version')
 
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                    authentication(userName: property('ossrh.username'), password: property('ossrh.password'))
                 }
 
                 snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                    authentication(userName: property('ossrh.username'), password: property('ossrh.password'))
                 }
 
                 pom.project {
-                    name pomName
+                    name property('pom.name')
+                    description property('pom.description')
                     packaging 'jar'
-                    artifactId
-                    description pomDescription
-                    url pomUrl
+                    url property('pom.url')
 
                     licenses {
                         license {
-                            name pomLicenceName
-                            url pomLicenceUrl
+                            name property('pom.licence.name')
+                            url property('pom.licence.url')
                         }
                     }
 
                     developers {
                         developer {
-                            id pomDeveloperId
-                            name pomDeveloperName
+                            id property('pom.developer.id')
+                            name property('pom.developer.name')
                         }
                     }
 
                     scm {
-                        url pomScmUrl
-                        connection pomScmConnection
-                        developerConnection pomScmDeveloperConnection
+                        url property('pom.scm.url')
+                        connection property('pom.scm.connection')
+                        developerConnection property('pom.scm.developerConnection')
                         tag 'HEAD'
                     }
                 }
