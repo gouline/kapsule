@@ -64,13 +64,6 @@ if (hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
                         }
                     }
 
-                    developers {
-                        developer {
-                            id property('pom.developer.id')
-                            name property('pom.developer.name')
-                        }
-                    }
-
                     scm {
                         url property('pom.scm.url')
                         connection property('pom.scm.connection')

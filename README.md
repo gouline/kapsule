@@ -1,4 +1,4 @@
-# Kapsule
+# Kapsule [![Build Status](https://travis-ci.org/traversals/kapsule.svg?branch=master)](https://travis-ci.org/traversals/kapsule)
 
 Minimalist dependency injection library for Kotlin.
 
