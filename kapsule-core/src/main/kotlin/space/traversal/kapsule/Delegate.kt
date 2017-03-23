@@ -1,4 +1,4 @@
-package net.gouline.kapsule
+package space.traversal.kapsule
 
 import kotlin.reflect.KProperty
 

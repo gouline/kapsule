@@ -1,6 +1,6 @@
-package net.gouline.kapsule.demo.di
+package space.traversal.kapsule.demo.di
 
-import net.gouline.kapsule.demo.Context
+import space.traversal.kapsule.demo.Context
 
 /**
  * Main implementation of [PersonModule].

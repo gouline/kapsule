@@ -1,7 +1,7 @@
-package net.gouline.kapsule.demo
+package space.traversal.kapsule.demo
 
-import net.gouline.kapsule.Kapsule
-import net.gouline.kapsule.demo.di.DemoModule
+import space.traversal.kapsule.Kapsule
+import space.traversal.kapsule.demo.di.DemoModule
 
 fun main(args: Array<String>) {
     val demo = Demo(Context())

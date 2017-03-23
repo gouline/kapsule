@@ -12,7 +12,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'net.gouline.kapsule.demo.DemoKt'
+mainClassName = 'space.traversal.kapsule.demo.DemoKt'
 
 dependencies {
     compile project(':kapsule-core')

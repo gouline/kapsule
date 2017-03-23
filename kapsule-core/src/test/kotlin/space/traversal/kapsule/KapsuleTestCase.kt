@@ -1,4 +1,4 @@
-package net.gouline.kapsule
+package space.traversal.kapsule
 
 import junit.framework.TestCase
 import org.junit.Test

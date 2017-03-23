@@ -1,4 +1,4 @@
-package net.gouline.kapsule
+package space.traversal.kapsule
 
 /**
  * Test module with one required (non-null) value.

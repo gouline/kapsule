@@ -1,8 +1,8 @@
-package net.gouline.kapsule.demo
+package space.traversal.kapsule.demo
 
-import net.gouline.kapsule.demo.di.DemoModule
-import net.gouline.kapsule.demo.di.TestContactsModule
-import net.gouline.kapsule.demo.di.TestPersonModule
+import space.traversal.kapsule.demo.di.DemoModule
+import space.traversal.kapsule.demo.di.TestContactsModule
+import space.traversal.kapsule.demo.di.TestPersonModule
 
 /**
  * Test implementation of [Context].

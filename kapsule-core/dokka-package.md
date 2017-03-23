@@ -1,3 +1,3 @@
-# Package net.gouline.kapsule
+# Package space.traversal.kapsule
 
 Kapsule API

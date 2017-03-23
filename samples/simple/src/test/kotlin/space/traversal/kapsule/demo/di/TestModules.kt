@@ -1,4 +1,4 @@
-package net.gouline.kapsule.demo.di
+package space.traversal.kapsule.demo.di
 
 /**
  * Test implementation of [PersonModule].
