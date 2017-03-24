@@ -13,8 +13,8 @@ class KapsuleTestCase : TestCase() {
     @Test fun testRequired() {
         val kap = Kapsule<MultiModule>()
         assertEquals(true, kap.req { reqInt }.required)
-        assertEquals(true, kap { reqInt }.required)
-        assertEquals(false, kap.opt { reqInt }.required)
+        assertEquals(true, kap<Int> { reqInt }.required)
+        assertEquals(false, kap.opt<Int?> { reqInt }.required)
     }
 
     @Test fun testDelegates() {
@@ -33,8 +33,8 @@ class KapsuleTestCase : TestCase() {
         val kap = Kapsule<MultiModule>()
         val prop = Mockito.mock(KProperty::class.java)
 
-        val optStringDelegate = kap.opt { optString }
-        val reqIntDelegate = kap { reqInt }
+        val optStringDelegate = kap.opt<String?> { optString }
+        val reqIntDelegate = kap<Int> { reqInt }
 
         listOf(MultiModule("test1", 3, "abc123"),
                 MultiModule("test2", 7, "xyz890")).forEach { module ->
