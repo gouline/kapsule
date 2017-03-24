@@ -19,7 +19,7 @@ class Demo(context: Context) {
 
     val firstName by kap { firstName }
     val lastName by kap.opt { lastName }
-    val emails by kap { emails }
+    val emails by kap.req { emails }
 
     init {
         kap.inject(context.module)

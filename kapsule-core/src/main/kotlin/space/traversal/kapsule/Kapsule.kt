@@ -23,14 +23,14 @@ class Kapsule<M> {
      *
      * @param initializer Initializer function from the module context to value.
      */
-    fun <T> req(initializer: M.() -> T) = Delegate(initializer, true).apply { delegates += this }
+    fun <T> req(initializer: M.() -> T) = Delegate.Required(initializer).apply { delegates += this }
 
     /**
      * Creates and registers delegate for an optional (nullable) injectable property.
      *
      * @param initializer Initializer function from the module context to value.
      */
-    fun <T> opt(initializer: M.() -> T?) = Delegate(initializer, false).apply { delegates += this }
+    fun <T> opt(initializer: M.() -> T?) = Delegate.Optional(initializer).apply { delegates += this }
 
     /**
      * Shortcut for [req] by invoking the class like a function.
