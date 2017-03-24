@@ -12,9 +12,9 @@ class KapsuleTestCase : TestCase() {
 
     @Test fun testRequired() {
         val kap = Kapsule<MultiModule>()
-        assertEquals(true, kap.req { reqInt }.required)
-        assertEquals(true, kap<Int> { reqInt }.required)
-        assertEquals(false, kap.opt<Int?> { reqInt }.required)
+        assertTrue(kap.req { reqInt } is Delegate.Required)
+        assertTrue(kap<Int> { reqInt } is Delegate.Required)
+        assertTrue(kap.opt<Int?> { reqInt } is Delegate.Optional)
     }
 
     @Test fun testDelegates() {

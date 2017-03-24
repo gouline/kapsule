@@ -17,7 +17,7 @@ class Demo(context: Context) {
 
     private val kap = Kapsule<DemoModule>()
 
-    val firstName by kap { firstName }
+    var firstName by kap { firstName }
     val lastName by kap.opt { lastName }
     val emails by kap { emails }
 

@@ -14,7 +14,7 @@ class DemoAppTestCase : TestCase() {
         val demo = Demo(testContext)
         assertEquals("Jane", demo.firstName)
         assertEquals("Doe", demo.lastName)
-        assertTrue(demo.emails!!.contains("jdoe@example.org"))
-        assertTrue(demo.emails!!.contains("jane@example.org"))
+        assertTrue(demo.emails.contains("jdoe@example.org"))
+        assertTrue(demo.emails.contains("jane@example.org"))
     }
 }

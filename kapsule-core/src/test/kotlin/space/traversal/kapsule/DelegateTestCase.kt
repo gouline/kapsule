@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
 class DelegateTestCase : TestCase() {
 
     @Test fun testInitialize_required() {
-        val delegate = Delegate<RequiredModule, String>({ value }, true)
+        val delegate = Delegate.Required<RequiredModule, String> { value }
         assertEquals(null, delegate.value)
 
         listOf("one", "two").forEach { value ->
@@ -22,7 +22,7 @@ class DelegateTestCase : TestCase() {
     }
 
     @Test fun testInitialize_optional() {
-        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        val delegate = Delegate.Optional<OptionalModule, String?> { value }
         assertEquals(null, delegate.value)
 
         listOf(null, "three").forEach { value ->
@@ -33,7 +33,7 @@ class DelegateTestCase : TestCase() {
     }
 
     @Test fun testGetValue_required() {
-        val delegate = Delegate<RequiredModule, String>({ value }, true)
+        val delegate = Delegate.Required<RequiredModule, String> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
         try {
@@ -49,7 +49,7 @@ class DelegateTestCase : TestCase() {
     }
 
     @Test fun testGetValue_optional() {
-        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        val delegate = Delegate.Optional<OptionalModule, String?> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
         assertEquals(null, delegate.getValue(null, prop))
@@ -60,7 +60,7 @@ class DelegateTestCase : TestCase() {
     }
 
     @Test fun testSetValue_required() {
-        val delegate = Delegate<RequiredModule, String>({ value }, true)
+        val delegate = Delegate.Required<RequiredModule, String> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
         listOf("test3", "test4").forEach { expected ->
@@ -70,7 +70,7 @@ class DelegateTestCase : TestCase() {
     }
 
     @Test fun testSetValue_optional() {
-        val delegate = Delegate<OptionalModule, String?>({ value }, false)
+        val delegate = Delegate.Optional<OptionalModule, String?> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
         listOf("test3", null).forEach { expected ->

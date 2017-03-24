@@ -8,9 +8,8 @@ import kotlin.reflect.KProperty
  * @param <M> Module type that injects it.
  * @param <T> Property value type.
  * @param initializer Value initializer function.
- * @param required True for required (non-null), otherwise optional (nullable).
  */
-class Delegate<in M, T>(internal val initializer: M.() -> T, internal val required: Boolean = false) {
+sealed class Delegate<in M, T>(internal val initializer: M.() -> T?) {
 
     internal var value: T? = null
 
@@ -24,14 +23,38 @@ class Delegate<in M, T>(internal val initializer: M.() -> T, internal val requir
     }
 
     /**
-     * Delegate for value reads.
+     * Delegate for required (non-null) values.
      */
-    operator fun getValue(thisRef: Any?, property: KProperty<*>) = if (required) value!! else value
+    class Required<in M, T>(initializer: M.() -> T) : Delegate<M, T>(initializer) {
+
+        /**
+         * Delegate for value reads.
+         */
+        operator fun getValue(thisRef: Any?, property: KProperty<*>) = value!!
+
+        /**
+         * Delegate for value writes.
+         */
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, t: T) {
+            value = t
+        }
+    }
 
     /**
-     * Delegate for value writes.
+     * Delegate for optional (nullable) values.
      */
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, t: T) {
-        value = t
+    class Optional<in M, T>(initializer: M.() -> T?) : Delegate<M, T>(initializer) {
+
+        /**
+         * Delegate for value reads.
+         */
+        operator fun getValue(thisRef: Any?, property: KProperty<*>) = value
+
+        /**
+         * Delegate for value writes.
+         */
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, t: T?) {
+            value = t
+        }
     }
 }
