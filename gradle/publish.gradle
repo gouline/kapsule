@@ -39,35 +39,42 @@ if (hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                pom.groupId = property('publish.groupId')
-                pom.artifactId = property('publish.artifactId')
-                pom.version = property('publish.version')
+                pom.groupId = project['publish.groupId']
+                pom.artifactId = project['publish.artifactId']
+                pom.version = project['publish.version']
 
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: property('ossrh.username'), password: property('ossrh.password'))
+                    authentication(userName: project['ossrh.username'], password: project['ossrh.password'])
                 }
 
                 snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: property('ossrh.username'), password: property('ossrh.password'))
+                    authentication(userName: project['ossrh.username'], password: project['ossrh.password'])
                 }
 
                 pom.project {
-                    name property('pom.name')
-                    description property('pom.description')
+                    name project['pom.name']
+                    description project['pom.description']
                     packaging 'jar'
-                    url property('pom.url')
+                    url project['pom.url']
 
                     licenses {
                         license {
-                            name property('pom.licence.name')
-                            url property('pom.licence.url')
+                            name project['pom.licence.name']
+                            url project['pom.licence.url']
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id project['pom.developer.id']
+                            name project['pom.developer.name']
                         }
                     }
 
                     scm {
-                        url property('pom.scm.url')
-                        connection property('pom.scm.connection')
-                        developerConnection property('pom.scm.developerConnection')
+                        url project['pom.scm.url']
+                        connection project['pom.scm.connection']
+                        developerConnection project['pom.scm.developerConnection']
                         tag 'HEAD'
                     }
                 }
