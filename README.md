@@ -18,8 +18,8 @@ Why create another dependency injection library? Here are the objectives pursued
     - No need for `lateinit` on properties and they can be private and read-only
 * No magic, keep everything as a hard reference
     - Reading code is easier when you can click through all the references in your IDE
-* Utilise the power of Kotlin
-    - Simplify code with its language features, instead of maximising Java compatibility
+* Utilize the power of Kotlin
+    - Simplify code with its language features, instead of maximizing Java compatibility
   
 ## Injection
 
