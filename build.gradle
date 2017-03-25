@@ -1,6 +1,7 @@
 buildscript {
     ext {
-        kotlin_version = '1.0.7'
+        kotlin_minVersion = '1.0.7'
+        kotlin_maxVersion = '1.1.1'
         junit_version = '4.12'
         mockito_version = '2.7.19'
     }
@@ -10,7 +11,6 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.13'
     }
@@ -22,8 +22,6 @@ subprojects {
             jcenter()
         }
     }
-
-    apply plugin: 'kotlin'
 
     repositories {
         jcenter()

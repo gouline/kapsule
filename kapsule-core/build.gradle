@@ -1,11 +1,19 @@
+buildscript {
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_minVersion"
+    }
+}
+
+apply plugin: 'kotlin'
+
+group project['publish.groupId']
+version project['publish.version']
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_minVersion"
 
     testCompile "junit:junit:$junit_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
 }
-
-group project['publish.groupId']
-version project['publish.version']
 
 apply from: '../gradle/publish.gradle'
