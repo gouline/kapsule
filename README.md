@@ -43,7 +43,7 @@ dependencies {
 }
 ```
 
-Release builds are made available on `jcenter()` and `mavenCentral()` repositories.
+Releases are published to `jcenter()` and `mavenCentral()` repositories.
 
 ## License
 
