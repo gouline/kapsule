@@ -1,10 +1,10 @@
-apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'signing'
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from dokka
+ext {
+    isReleaseVersion = !version.endsWith("-SNAPSHOT")
 }
 
 task sourcesJar(type: Jar) {
@@ -12,13 +12,9 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    required { gradle.taskGraph.hasTask(tasks.uploadArchives) }
-    sign configurations.archives
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from dokka
 }
 
 dokka {
@@ -33,50 +29,75 @@ dokka {
     }
 }
 
-if (hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+artifacts {
+    archives sourcesJar, javadocJar
+}
 
-                pom.groupId = project['publish.groupId']
-                pom.artifactId = project['publish.artifactId']
-                pom.version = project['publish.version']
+signing {
+    required { isReleaseVersion }
+    sign configurations.archives
+}
 
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: project['ossrh.username'], password: project['ossrh.password'])
-                }
+def pomConfig = {
+    licenses {
+        license {
+            name project['publish.license.name']
+            url project['publish.license.url']
+        }
+    }
+    developers {
+        developer {
+            id project['publish.developer.id']
+            name project['publish.developer.name']
+        }
+    }
+}
 
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: project['ossrh.username'], password: project['ossrh.password'])
-                }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project['publish.groupId']
+            artifactId project['publish.artifactId']
+            version project['publish.version']
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', project['publish.name'])
+                root.appendNode('description', project['publish.description'])
+                root.appendNode('url', project['publish.url'])
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
 
-                pom.project {
-                    name project['pom.name']
-                    description project['pom.description']
-                    packaging 'jar'
-                    url project['pom.url']
+if (hasProperty('bintray.user') && hasProperty('bintray.key') &&
+        hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
+    bintray {
+        user = project['bintray.user']
+        key = project['bintray.key']
+        publications = ['mavenJava']
 
-                    licenses {
-                        license {
-                            name project['pom.licence.name']
-                            url project['pom.licence.url']
-                        }
-                    }
+        dryRun = false
+        publish = true
 
-                    developers {
-                        developer {
-                            id project['pom.developer.id']
-                            name project['pom.developer.name']
-                        }
-                    }
-
-                    scm {
-                        url project['pom.scm.url']
-                        connection project['pom.scm.connection']
-                        developerConnection project['pom.scm.developerConnection']
-                        tag 'HEAD'
-                    }
+        pkg {
+            name = project['publish.artifactId']
+            desc = project['publish.description']
+            repo = project['bintray.repo']
+            userOrg = project['bintray.userOrg']
+            licenses = [project['publish.license.name']]
+            websiteUrl = project['publish.url']
+            vcsUrl = project['publish.vcsHttp']
+            version {
+                name = project['publish.version']
+                released = new Date()
+                vcsTag = "v${project['publish.version']}"
+                mavenCentralSync {
+                    user = project['ossrh.username']
+                    password = project['ossrh.password']
                 }
             }
         }

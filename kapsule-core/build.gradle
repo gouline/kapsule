@@ -5,4 +5,7 @@ dependencies {
     testCompile "org.mockito:mockito-core:$mockito_version"
 }
 
+group project['publish.groupId']
+version project['publish.version']
+
 apply from: '../gradle/publish.gradle'
