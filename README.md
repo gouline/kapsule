@@ -21,11 +21,11 @@ Why create another dependency injection library? Here are the objectives pursued
 * Utilize the power of Kotlin
     - Simplify code with its language features, instead of maximizing Java compatibility
   
-## Injection
+## Modules
 
 TODO
 
-## Modules
+## Injection
 
 TODO
 
