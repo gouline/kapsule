@@ -40,6 +40,8 @@ class Module {
 }
 ```
 
+*TODO: Conclusion*
+
 ### Step 2: Inject properties
 
 Now consider the class `Screen` that needs properties to be injected. You need to instantiate an injection Kapsule (hence the name). Invoking it as a function returns a uninitialized property delegate. 
@@ -58,23 +60,27 @@ class Screen {
 }
 ```
 
+*TODO: Conclusion*
+
 ## Advanced setup
 
-Injection consists of two parts:
-
-* Modules - where  
+*TODO: More flexible setup*
 
 ### Modules
 
-TODO
+*TODO: Combining modules by delegation*
 
 ### Delegates
 
-TODO
+*TODO: Required and optional delegates*
 
-### Example
+## Kotlin 1.0 vs 1.1
 
-TODO
+*TODO: Inferred types*
+
+### Samples
+
+For sample projects using Kapsule, see the [samples](samples) directory. 
 
 ## Download
 
