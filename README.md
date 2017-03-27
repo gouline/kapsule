@@ -184,7 +184,7 @@ val firstName by kap<String> { firstName }
 val lastName by kap.opt<String?> { lastName }
 ```
 
-### Samples
+## Samples
 
 For sample projects using Kapsule, see the [samples](samples) directory. 
 
