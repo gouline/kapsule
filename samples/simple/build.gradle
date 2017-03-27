@@ -1,6 +1,8 @@
 buildscript {
+    ext.kotlin_version = kotlin_max_version
+
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_maxVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -15,7 +17,7 @@ mainClassName = 'space.traversal.kapsule.demo.DemoKt'
 dependencies {
     compile project(':kapsule-core')
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_maxVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile "junit:junit:$junit_version"
 }

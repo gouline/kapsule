@@ -1,6 +1,8 @@
 buildscript {
+    ext.kotlin_version = kotlin_min_version
+
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_minVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -10,7 +12,7 @@ group project['publish.groupId']
 version project['publish.version']
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_minVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile "junit:junit:$junit_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
