@@ -2,9 +2,9 @@ rootProject.name = 'kapsule'
 
 include 'kapsule-core'
 
-if (false && !hasProperty('excludeSamples')) {
+if (System.getenv('EXCLUDE_SAMPLES')) {
+    println('Excluding sample projects')
+} else {
     println('Including sample projects')
     include 'samples:simple', 'samples:android'
-} else {
-    println('Excluding sample projects')
 }
