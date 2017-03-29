@@ -2,7 +2,7 @@ rootProject.name = 'kapsule'
 
 include 'kapsule-core'
 
-if (!hasProperty('excludeSamples')) {
+if (false && !hasProperty('excludeSamples')) {
     println('Including sample projects')
     include 'samples:simple', 'samples:android'
 } else {
