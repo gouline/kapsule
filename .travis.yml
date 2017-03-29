@@ -3,6 +3,8 @@ sudo: false
 language: java
 jdk: oraclejdk8
 
+before_script: echo "Before script"
+
 script: ./gradlew kapsule-core:test -PexcludeSamples
 
 before_cache:
