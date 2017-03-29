@@ -3,7 +3,8 @@ sudo: false
 language: java
 jdk: oraclejdk8
 
-script: ./gradlew kapsule-core:test -PexcludeSamples
+script:
+  - ./gradlew kapsule-core:test -PexcludeSamples
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
