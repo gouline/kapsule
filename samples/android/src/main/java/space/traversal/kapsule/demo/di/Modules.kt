@@ -8,18 +8,34 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
+package space.traversal.kapsule.demo.di
 
-import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.demo.di.TestContactsModule
-import space.traversal.kapsule.demo.di.TestPersonModule
+import android.content.SharedPreferences
+import android.view.LayoutInflater
 
 /**
- * Test implementation of [Context].
+ * Application module.
  */
-class TestContext : Context() {
+class Module(
+        android: AndroidModule,
+        logging: LoggingModule) :
+        AndroidModule by android,
+        LoggingModule by logging
 
-    override val module = Module(
-            person = TestPersonModule(),
-            contacts = TestContactsModule())
+/**
+ * Module for Android objects.
+ */
+interface AndroidModule {
+
+    val layoutInflater: LayoutInflater
+
+    val sharedPreferences: SharedPreferences
+}
+
+/**
+ * Module for logging settings
+ */
+interface LoggingModule {
+
+    val enableLogging: Boolean
 }

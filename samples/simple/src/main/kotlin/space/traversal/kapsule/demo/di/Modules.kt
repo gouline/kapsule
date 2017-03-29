@@ -11,9 +11,9 @@
 package space.traversal.kapsule.demo.di
 
 /**
- * Application-wide module that combines all submodules.
+ * Application module.
  */
-class DemoModule(
+class Module(
         person: PersonModule,
         contacts: ContactsModule) :
         PersonModule by person,

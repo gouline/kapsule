@@ -10,7 +10,7 @@
 
 package space.traversal.kapsule.demo
 
-import space.traversal.kapsule.demo.di.DemoModule
+import space.traversal.kapsule.demo.di.Module
 import space.traversal.kapsule.demo.di.MainContactsModule
 import space.traversal.kapsule.demo.di.MainPersonModule
 
@@ -21,7 +21,7 @@ open class Context {
 
     val domain = "example.com"
 
-    open val module = DemoModule(
+    open val module = Module(
             person = MainPersonModule(),
             contacts = MainContactsModule(this))
 }

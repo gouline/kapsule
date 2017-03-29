@@ -11,7 +11,7 @@
 package space.traversal.kapsule.demo
 
 import space.traversal.kapsule.Kapsule
-import space.traversal.kapsule.demo.di.DemoModule
+import space.traversal.kapsule.demo.di.Module
 
 fun main(args: Array<String>) {
     val demo = Demo(Context())
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
  */
 class Demo(context: Context) {
 
-    private val kap = Kapsule<DemoModule>()
+    private val kap = Kapsule<Module>()
 
     var firstName by kap<String> { firstName }
     val lastName by kap.opt<String?> { lastName }

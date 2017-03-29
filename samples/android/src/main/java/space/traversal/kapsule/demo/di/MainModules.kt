@@ -8,18 +8,21 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
+package space.traversal.kapsule.demo.di
 
-import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.demo.di.TestContactsModule
-import space.traversal.kapsule.demo.di.TestPersonModule
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import android.view.LayoutInflater
 
-/**
- * Test implementation of [Context].
- */
-class TestContext : Context() {
+class MainAndroidModule(val context: Context) : AndroidModule {
 
-    override val module = Module(
-            person = TestPersonModule(),
-            contacts = TestContactsModule())
+    override val layoutInflater: LayoutInflater get() = LayoutInflater.from(context)
+
+    override val sharedPreferences: SharedPreferences get() = PreferenceManager.getDefaultSharedPreferences(context)
+}
+
+class MainLoggingModule : LoggingModule {
+
+    override val enableLogging = true
 }

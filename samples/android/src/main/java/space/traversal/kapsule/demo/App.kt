@@ -10,16 +10,26 @@
 
 package space.traversal.kapsule.demo
 
+import android.app.Application
+import android.content.Context
+import space.traversal.kapsule.demo.di.MainAndroidModule
+import space.traversal.kapsule.demo.di.MainLoggingModule
 import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.demo.di.TestContactsModule
-import space.traversal.kapsule.demo.di.TestPersonModule
 
 /**
- * Test implementation of [Context].
+ * Custom application class.
  */
-class TestContext : Context() {
+class App : Application() {
 
-    override val module = Module(
-            person = TestPersonModule(),
-            contacts = TestContactsModule())
+    companion object {
+        
+        /**
+         * Retrieves module from any context.
+         */
+        fun module(context: Context) = (context.applicationContext as App).module
+    }
+
+    private val module = Module(
+            MainAndroidModule(this),
+            MainLoggingModule())
 }
