@@ -12,6 +12,7 @@ gradle-app.setting
 
 # IDE
 .idea/
+*.iml
 
 # Built application files
 *.apk
