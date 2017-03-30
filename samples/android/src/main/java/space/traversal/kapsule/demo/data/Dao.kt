@@ -8,35 +8,20 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
-
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
+package space.traversal.kapsule.demo.data
 
 /**
- * Application module.
+ * Access layer for app data.
  */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+interface Dao {
 
-/**
- * Module for Android objects.
- */
-interface AndroidModule {
+    /**
+     * Fetches count or default.
+     */
+    fun fetchCount(): Int
 
-    val layoutInflater: LayoutInflater
-
-    val sharedPreferences: SharedPreferences
-}
-
-/**
- * Module for logging settings
- */
-interface DataModule {
-
-    val dao: Dao
+    /**
+     * Persists new count.
+     */
+    fun persistCount(count: Int)
 }

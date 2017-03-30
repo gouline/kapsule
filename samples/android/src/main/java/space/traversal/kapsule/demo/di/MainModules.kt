@@ -14,6 +14,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
+import space.traversal.kapsule.demo.data.MainDao
 
 class MainAndroidModule(val context: Context) : AndroidModule {
 
@@ -22,7 +23,7 @@ class MainAndroidModule(val context: Context) : AndroidModule {
     override val sharedPreferences: SharedPreferences get() = PreferenceManager.getDefaultSharedPreferences(context)
 }
 
-class MainLoggingModule : LoggingModule {
+class MainDataModule(val context: Context) : DataModule {
 
-    override val enableLogging = true
+    override val dao get() = MainDao(context)
 }

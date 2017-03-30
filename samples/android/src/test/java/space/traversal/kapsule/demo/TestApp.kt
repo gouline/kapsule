@@ -8,35 +8,18 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
+package space.traversal.kapsule.demo
 
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
-
-/**
- * Application module.
- */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+import space.traversal.kapsule.demo.di.Module
+import space.traversal.kapsule.demo.di.TestAndroidModule
+import space.traversal.kapsule.demo.di.TestDataModule
 
 /**
- * Module for Android objects.
+ * Test variant of [App].
  */
-interface AndroidModule {
+class TestApp : App() {
 
-    val layoutInflater: LayoutInflater
-
-    val sharedPreferences: SharedPreferences
-}
-
-/**
- * Module for logging settings
- */
-interface DataModule {
-
-    val dao: Dao
+    override fun createModule() = Module(
+            android = TestAndroidModule(),
+            data = TestDataModule())
 }

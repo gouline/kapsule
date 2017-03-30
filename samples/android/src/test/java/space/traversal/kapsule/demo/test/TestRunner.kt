@@ -8,35 +8,26 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
+package space.traversal.kapsule.demo.test
 
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
-
-/**
- * Application module.
- */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import org.robolectric.manifest.AndroidManifest
+import org.robolectric.res.Fs
 
 /**
- * Module for Android objects.
+ * Robolectric test runner.
  */
-interface AndroidModule {
+class TestRunner(testClass: Class<*>) : RobolectricTestRunner(testClass) {
 
-    val layoutInflater: LayoutInflater
-
-    val sharedPreferences: SharedPreferences
-}
-
-/**
- * Module for logging settings
- */
-interface DataModule {
-
-    val dao: Dao
+    override fun getAppManifest(config: Config): AndroidManifest {
+        return object : AndroidManifest(
+                Fs.fileFromPath("src/test/AndroidManifest.xml"),
+                Fs.fileFromPath("src/main/res"),
+                Fs.fileFromPath("src/main/assets")) {
+            override fun getTargetSdkVersion(): Int {
+                return 18
+            }
+        }
+    }
 }

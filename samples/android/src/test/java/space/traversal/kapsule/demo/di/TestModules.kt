@@ -8,20 +8,21 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
+package space.traversal.kapsule.demo.di
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import android.content.SharedPreferences
+import android.view.LayoutInflater
+import org.mockito.Mockito
+import space.traversal.kapsule.demo.data.TestDao
 
-/**
- * Example local unit test, which will execute on the development machine (host).
+class TestAndroidModule : AndroidModule {
 
- * @see [Testing documentation](http://d.android.com/tools/testing)
- */
-class ExampleUnitTest {
-    @Test
-    @Throws(Exception::class)
-    fun addition_isCorrect() {
-        assertEquals(4, (2 + 2).toLong())
-    }
+    override val layoutInflater: LayoutInflater = Mockito.mock(LayoutInflater::class.java)
+
+    override val sharedPreferences: SharedPreferences = Mockito.mock(SharedPreferences::class.java)
+}
+
+class TestDataModule : DataModule {
+
+    override val dao = TestDao()
 }

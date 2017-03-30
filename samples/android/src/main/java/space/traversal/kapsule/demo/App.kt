@@ -13,23 +13,25 @@ package space.traversal.kapsule.demo
 import android.app.Application
 import android.content.Context
 import space.traversal.kapsule.demo.di.MainAndroidModule
-import space.traversal.kapsule.demo.di.MainLoggingModule
+import space.traversal.kapsule.demo.di.MainDataModule
 import space.traversal.kapsule.demo.di.Module
 
 /**
  * Custom application class.
  */
-class App : Application() {
+open class App : Application() {
 
     companion object {
-        
+
         /**
          * Retrieves module from any context.
          */
         fun module(context: Context) = (context.applicationContext as App).module
     }
 
-    private val module = Module(
-            MainAndroidModule(this),
-            MainLoggingModule())
+    private val module = createModule()
+
+    open protected fun createModule() = Module(
+            android = MainAndroidModule(this),
+            data = MainDataModule(this))
 }

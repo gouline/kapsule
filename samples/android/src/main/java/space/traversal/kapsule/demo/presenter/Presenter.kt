@@ -8,35 +8,38 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
-
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
+package space.traversal.kapsule.demo.presenter
 
 /**
- * Application module.
+ * Base MVP presenter to extend.
  */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+abstract class Presenter<V : View> {
 
-/**
- * Module for Android objects.
- */
-interface AndroidModule {
+    protected var view: V? = null
 
-    val layoutInflater: LayoutInflater
+    /**
+     * Attaches new view.
+     */
+    open fun attach(v: V) {
+        view = v
+    }
 
-    val sharedPreferences: SharedPreferences
+    /**
+     * Detaches existing view.
+     */
+    open fun detach() {
+        view = null
+    }
+
+    /**
+     * Applies function to a view.
+     */
+    fun applyView(f: V.() -> Unit) {
+        view?.f()
+    }
 }
 
 /**
- * Module for logging settings
+ * Base MVP view to extend.
  */
-interface DataModule {
-
-    val dao: Dao
-}
+interface View

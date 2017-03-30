@@ -8,35 +8,32 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
+package space.traversal.kapsule.demo.data
 
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
-
-/**
- * Application module.
- */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+import android.content.Context
+import space.traversal.kapsule.Kapsule
+import space.traversal.kapsule.demo.App
+import space.traversal.kapsule.demo.di.Module
 
 /**
- * Module for Android objects.
+ * Main implementation of [Dao].
  */
-interface AndroidModule {
+class MainDao(context: Context) : Dao {
 
-    val layoutInflater: LayoutInflater
+    private companion object {
+        private val KEY_COUNT = "count"
+    }
 
-    val sharedPreferences: SharedPreferences
-}
+    private val kap = Kapsule<Module>()
+    private val prefs by kap { sharedPreferences }
 
-/**
- * Module for logging settings
- */
-interface DataModule {
+    init {
+        kap.inject(App.module(context))
+    }
 
-    val dao: Dao
+    override fun fetchCount() = prefs.getInt(KEY_COUNT, 0)
+
+    override fun persistCount(count: Int) {
+        prefs.edit().putInt(KEY_COUNT, count).apply()
+    }
 }

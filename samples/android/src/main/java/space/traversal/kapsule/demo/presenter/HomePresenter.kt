@@ -8,35 +8,50 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo.di
+package space.traversal.kapsule.demo.presenter
 
-import android.content.SharedPreferences
-import android.view.LayoutInflater
-import space.traversal.kapsule.demo.data.Dao
-
-/**
- * Application module.
- */
-class Module(
-        android: AndroidModule,
-        data: DataModule) :
-        AndroidModule by android,
-        DataModule by data
+import android.content.Context
+import space.traversal.kapsule.Kapsule
+import space.traversal.kapsule.demo.App
+import space.traversal.kapsule.demo.di.Module
 
 /**
- * Module for Android objects.
+ * Presenter for home screen.
  */
-interface AndroidModule {
+class HomePresenter(context: Context) : Presenter<HomeView>() {
 
-    val layoutInflater: LayoutInflater
+    private val kap = Kapsule<Module>()
+    private val dao by kap { dao }
 
-    val sharedPreferences: SharedPreferences
+    init {
+        kap.inject(App.module(context))
+    }
+
+    /**
+     * Loads initial count and refreshes view.
+     */
+    fun load() {
+        val count = dao.fetchCount()
+        applyView { updateCount(count) }
+    }
+
+    /**
+     * Updates count with delta and refreshes view.
+     */
+    fun update(delta: Int) {
+        val count = Math.min(Math.max(dao.fetchCount() + delta, 0), 5)
+        dao.persistCount(count)
+        applyView { updateCount(count) }
+    }
 }
 
 /**
- * Module for logging settings
+ * View for home screen.
  */
-interface DataModule {
+interface HomeView : View {
 
-    val dao: Dao
+    /**
+     * Refreshes view with new count.
+     */
+    fun updateCount(count: Int)
 }
