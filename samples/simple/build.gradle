@@ -1,7 +1,5 @@
 buildscript {
-    ext {
-        kotlin_version = '1.1.1'
-    }
+    ext.kotlin_version = kotlin_max_version
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -11,6 +9,8 @@ buildscript {
 plugins {
     id 'application'
 }
+
+apply plugin: 'kotlin'
 
 mainClassName = 'space.traversal.kapsule.demo.DemoKt'
 
