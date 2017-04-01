@@ -45,6 +45,11 @@ def pomConfig = {
             name project['publish.developer.name']
         }
     }
+    scm {
+        connection "scm:git:${project['publish.vcsHttp']}"
+        developerConnection "scm:git:${project['publish.vcsSsh']}"
+        url project['publish.vcsUrl']
+    }
 }
 
 publishing {
@@ -85,13 +90,13 @@ if (hasProperty('bintray.user') && hasProperty('bintray.key') &&
             licenses = [project['publish.license.name']]
             websiteUrl = project['publish.url']
             vcsUrl = project['publish.vcsHttp']
-            gpg {
-                sign = true
-            }
             version {
-                name = project['publish.version']
                 released = new Date()
+                name = project['publish.version']
                 vcsTag = "v${project['publish.version']}"
+                gpg {
+                    sign = true
+                }
                 mavenCentralSync {
                     user = project['ossrh.username']
                     password = project['ossrh.password']
