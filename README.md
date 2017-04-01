@@ -186,15 +186,15 @@ Note that any delegates can be injected repeatedly, regardless of whether they'r
 Kotlin 1.1 infers property types from the delegates, which allows for a simpler definitions:
 
 ```kotlin
-val firstName by kap { firstName }
-val lastName by kap.optional { lastName }
+val firstName by required { firstName }
+val lastName by optional { lastName }
 ```
 
 However, when using 1.0, you have to specify the types explicitly:
  
 ```kotlin
-val firstName by kap<String> { firstName }
-val lastName by kap.optional<String?> { lastName }
+val firstName by required<String> { firstName }
+val lastName by optional<String?> { lastName }
 ```
 
 ## Samples
