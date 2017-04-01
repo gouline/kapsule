@@ -1,7 +1,6 @@
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'signing'
 
 ext {
     isReleaseVersion = !version.endsWith("-SNAPSHOT")
@@ -31,11 +30,6 @@ dokka {
 
 artifacts {
     archives sourcesJar, javadocJar
-}
-
-signing {
-    required { isReleaseVersion }
-    sign configurations.archives
 }
 
 def pomConfig = {
@@ -84,13 +78,16 @@ if (hasProperty('bintray.user') && hasProperty('bintray.key') &&
         publish = true
 
         pkg {
-            name = project['publish.artifactId']
-            desc = project['publish.description']
+            name = project['bintray.package']
             repo = project['bintray.repo']
             userOrg = project['bintray.userOrg']
+            desc = project['publish.description']
             licenses = [project['publish.license.name']]
             websiteUrl = project['publish.url']
             vcsUrl = project['publish.vcsHttp']
+            gpg {
+                sign = true
+            }
             version {
                 name = project['publish.version']
                 released = new Date()
