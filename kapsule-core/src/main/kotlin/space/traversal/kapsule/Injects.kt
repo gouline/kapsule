@@ -8,29 +8,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
-
-import space.traversal.kapsule.Injects
-import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.kap
-
-fun main(args: Array<String>) {
-    val demo = Demo(Context())
-    println("First name: ${demo.firstName}")
-    println("Last name: ${demo.lastName}")
-    println("Emails: ${demo.emails}")
-}
+package space.traversal.kapsule
 
 /**
- * Demo app definition.
+ * Injection interface.
  */
-class Demo(context: Context) : Injects<Module> {
-
-    var firstName by kap.req { firstName }
-    val lastName by kap.opt { lastName }
-    val emails by kap.req { emails }
-
-    init {
-        kap.inject(context.module)
-    }
+interface Injects<in M> {
 }
