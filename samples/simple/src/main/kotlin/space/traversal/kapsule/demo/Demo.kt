@@ -12,7 +12,6 @@ package space.traversal.kapsule.demo
 
 import space.traversal.kapsule.Injects
 import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.kap
 
 fun main(args: Array<String>) {
     val demo = Demo(Context())
@@ -26,11 +25,11 @@ fun main(args: Array<String>) {
  */
 class Demo(context: Context) : Injects<Module> {
 
-    var firstName by kap.req { firstName }
-    val lastName by kap.opt { lastName }
-    val emails by kap.req { emails }
+    var firstName by required { firstName }
+    val lastName by optional { lastName }
+    val emails by required { emails }
 
     init {
-        kap.inject(context.module)
+        inject(context.module)
     }
 }

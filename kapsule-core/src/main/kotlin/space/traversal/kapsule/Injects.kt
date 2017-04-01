@@ -13,5 +13,22 @@ package space.traversal.kapsule
 /**
  * Injection interface.
  */
-interface Injects<in M> {
+interface Injects<M> {
+
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.required].
+     */
+    fun <T> required(initializer: M.() -> T) = Kapsules.get(this).required(initializer)
+
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.optional].
+     */
+    fun <T> optional(initializer: M.() -> T?) = Kapsules.get(this).optional(initializer)
+
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.inject].
+     */
+    fun <M> Injects<M>.inject(module: M) {
+        Kapsules.get(this).inject(module)
+    }
 }

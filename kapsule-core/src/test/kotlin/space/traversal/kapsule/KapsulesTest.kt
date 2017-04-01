@@ -10,29 +10,28 @@
 
 package space.traversal.kapsule
 
-import space.traversal.kapsule.util.CallerMap
+import junit.framework.TestCase
+import org.junit.Test
+import org.omg.CORBA.Object
 
 /**
- * Static storage of [Kapsule] instances.
+ * Test case for [Kapsules].
  */
-object Kapsules {
+class KapsulesTest : TestCase() {
 
-    internal val instances = CallerMap<Injects<*>, Kapsule<*>>()
+    @Test fun testFetch() {
+        Kapsules.instances.clear()
+        val caller = object : Injects<Object> {}
+        assertEquals(null, Kapsules.fetch(caller))
+        assertEquals(0, Kapsules.instances.size)
 
-    /**
-     * Retrieves active instance of [Kapsule] or creates a new one.
-     *
-     * @param caller Injection caller instance, used as lookup key.
-     * @return Stored or new instance.
-     */
-    fun <M> get(caller: Injects<M>) = fetch(caller) ?: Kapsule<M>().apply { instances[caller] = this }
+    }
 
-    /**
-     * Fetches stored instance.
-     *
-     * @param caller Injection caller instance, used as lookup key.
-     * @return Stored instance or null.
-     */
-    @Suppress("UNCHECKED_CAST")
-    internal fun <M> fetch(caller: Injects<M>) = instances[caller] as? Kapsule<M>
+    @Test fun testGet() {
+        Kapsules.instances.clear()
+        val caller = object : Injects<Object> {}
+        val kap = Kapsules.get(caller)
+        assertEquals(kap, Kapsules.get(caller))
+        assertEquals(1, Kapsules.instances.size)
+    }
 }

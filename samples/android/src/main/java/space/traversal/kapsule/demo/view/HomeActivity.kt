@@ -13,6 +13,7 @@ package space.traversal.kapsule.demo.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import space.traversal.kapsule.Injects
 import space.traversal.kapsule.Kapsule
 import space.traversal.kapsule.demo.App
 import space.traversal.kapsule.demo.R
@@ -23,17 +24,16 @@ import space.traversal.kapsule.demo.presenter.HomeView
 /**
  * View for [HomePresenter].
  */
-class HomeActivity : AppCompatActivity(), HomeView {
+class HomeActivity : AppCompatActivity(), HomeView, Injects<Module> {
 
-    private val kap = Kapsule<Module>()
-    private val inflater by kap { layoutInflater }
+    private val inflater by required { layoutInflater }
 
     private lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        kap.inject(App.module(this))
+        inject(App.module(this))
 
         presenter = HomePresenter(this).also { it.attach(this) }
 
