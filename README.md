@@ -194,7 +194,7 @@ To use Kapsule in your project, include it as a dependency:
   
 ```gradle
 dependencies {
-    compile "space.traversal.kapsule:kapsule-core:x.y.z"
+    compile "space.traversal.kapsule:kapsule-core:0.1"
 }
 ```
 
