@@ -11,6 +11,9 @@
 <resources>
 
     <string name="app_name">Kapsule Demo</string>
+
+    <string name="title_counter">Counter</string>
+
     <string name="button_add">Add</string>
     <string name="button_remove">Remove</string>
 

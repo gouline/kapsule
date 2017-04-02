@@ -10,8 +10,11 @@
 
 package space.traversal.kapsule.demo.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import space.traversal.kapsule.Injects
 import space.traversal.kapsule.Kapsule
@@ -41,6 +44,19 @@ class HomeActivity : AppCompatActivity(), HomeView, Injects<Module> {
         btn_remove.setOnClickListener { presenter.update(-1) }
 
         presenter.load()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        R.id.menu_counter -> {
+            startActivity(Intent(this, CounterActivity::class.java))
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
