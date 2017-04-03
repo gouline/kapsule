@@ -9,26 +9,12 @@
   ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="space.traversal.kapsule.demo">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:name=".App"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".view.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+    <item
+            android:id="@+id/menu_counter"
+            android:title="@string/title_counter"
+            app:showAsAction="ifRoom"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name=".view.CounterActivity"
-                android:label="@string/title_counter"/>
-    </application>
-
-</manifest>
+</menu>

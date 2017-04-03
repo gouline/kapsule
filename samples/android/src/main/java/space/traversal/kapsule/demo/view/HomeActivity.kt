@@ -10,9 +10,13 @@
 
 package space.traversal.kapsule.demo.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
+import space.traversal.kapsule.Injects
 import space.traversal.kapsule.Kapsule
 import space.traversal.kapsule.demo.App
 import space.traversal.kapsule.demo.R
@@ -23,17 +27,16 @@ import space.traversal.kapsule.demo.presenter.HomeView
 /**
  * View for [HomePresenter].
  */
-class HomeActivity : AppCompatActivity(), HomeView {
+class HomeActivity : AppCompatActivity(), HomeView, Injects<Module> {
 
-    private val kap = Kapsule<Module>()
-    private val inflater by kap { layoutInflater }
+    private val inflater by required { layoutInflater }
 
     private lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        kap.inject(App.module(this))
+        inject(App.module(this))
 
         presenter = HomePresenter(this).also { it.attach(this) }
 
@@ -41,6 +44,19 @@ class HomeActivity : AppCompatActivity(), HomeView {
         btn_remove.setOnClickListener { presenter.update(-1) }
 
         presenter.load()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        R.id.menu_counter -> {
+            startActivity(Intent(this, CounterActivity::class.java))
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

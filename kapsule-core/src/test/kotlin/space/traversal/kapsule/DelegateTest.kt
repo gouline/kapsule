@@ -18,7 +18,7 @@ import kotlin.reflect.KProperty
 /**
  * Test case for [Delegate].
  */
-class DelegateTestCase : TestCase() {
+class DelegateTest : TestCase() {
 
     @Test fun testInitialize_required() {
         val delegate = Delegate.Required<RequiredModule, String> { value }

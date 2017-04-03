@@ -44,16 +44,15 @@ This will provide the same instance of `name` and a new instance of `Manager` fo
 
 ### Step 2: Inject properties
 
-Let's say you have a class `Screen` that needs these values. You need to create an injection Kapsule (hence the name) and invoke it as a function to map uninitialized delegates to your properties.    
+Let's say you have a class `Screen` that needs these values. You need to indicate the target module by implementing `Injects<Module>` interface with the target module and request uninitialized delegates for your properties.    
 
 ```kotlin
-class Screen {
-    private val kap = Kapsule<Module>()
-    private val name by kap { name }
-    private val manager by kap { manager }
+class Screen : Injects<Module> {
+    private val name by required { name }
+    private val manager by required { manager }
     
     init {
-        kap.inject(Application.module)
+        inject(Application.module)
     }
 }
 ```
@@ -139,25 +138,39 @@ object Application {
 
 ### Optional delegates
 
-So far you've only seen non-null values, but what happens if you need to inject a nullable value? You can use the `opt` function on your Kapsule:
+So far you've only seen non-null values, but what happens if you need to inject a nullable value? You can use the `optional` function on your Kapsule:
 
 ```kotlin
-val kap = Kapsule<Module>()
-val firstName by kap { firstName }
-val lastName by kap.opt { lastName }
+val firstName by required { firstName }
+val lastName by optional { lastName }
 ```
 
-Given both fields are strings, `firstName` is `String`, while `lastName` is `String?`. The default `kap {}` is actually shorthand for `kap.req {}`, so either can be used interchangeably.
+Given both fields are strings, `firstName` is `String`, while `lastName` is `String?`.
 
 Unlike non-null properties, nullable ones can be read even before injection (the former would throw `KotlinNullPointerException`). 
+
+### Manual injection
+
+While the more convenient way to inject modules is by implementing the `Injects<Module>` interface, you may want to split the injection of separate modules (e.g. for testing). This can be done by creating separate instances of `Kapsule<Module>` and calling the injection methods on it.
+ 
+```kotlin
+class Screen {
+    private val kap = Kapsule<Module>()
+    private val name by kap.required { name }
+    private val manager by kap.required { manager }
+    
+    init {
+        kap.inject(Application.module)
+    }
+}
+```
 
 ### Variable delegates
 
 In most cases you would make the injected properties `val`, however there's no reason it can't be a `var`, which would allow you to reassign it before or after injection.
 
 ```kotlin
-val kap = Kapsule<Module>()
-var firstName by kap { firstName }
+var firstName by required { firstName }
  
 init {
     firstName = "before"
@@ -173,15 +186,15 @@ Note that any delegates can be injected repeatedly, regardless of whether they'r
 Kotlin 1.1 infers property types from the delegates, which allows for a simpler definitions:
 
 ```kotlin
-val firstName by kap { firstName }
-val lastName by kap.opt { lastName }
+val firstName by required { firstName }
+val lastName by optional { lastName }
 ```
 
 However, when using 1.0, you have to specify the types explicitly:
  
 ```kotlin
-val firstName by kap<String> { firstName }
-val lastName by kap.opt<String?> { lastName }
+val firstName by required<String> { firstName }
+val lastName by optional<String?> { lastName }
 ```
 
 ## Samples
@@ -194,7 +207,7 @@ To use Kapsule in your project, include it as a dependency:
   
 ```gradle
 dependencies {
-    compile "space.traversal.kapsule:kapsule-core:0.1"
+    compile "space.traversal.kapsule:kapsule-core:0.2"
 }
 ```
 

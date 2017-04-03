@@ -8,28 +8,27 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
-
-import space.traversal.kapsule.Injects
-import space.traversal.kapsule.demo.di.Module
-
-fun main(args: Array<String>) {
-    val demo = Demo(Context())
-    println("First name: ${demo.firstName}")
-    println("Last name: ${demo.lastName}")
-    println("Emails: ${demo.emails}")
-}
+package space.traversal.kapsule
 
 /**
- * Demo app definition.
+ * Injection interface.
  */
-class Demo(context: Context) : Injects<Module> {
+interface Injects<M> {
 
-    var firstName by required { firstName }
-    val lastName by optional { lastName }
-    val emails by required { emails }
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.required].
+     */
+    fun <T> required(initializer: M.() -> T) = Kapsules.get(this).required(initializer)
 
-    init {
-        inject(context.module)
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.optional].
+     */
+    fun <T> optional(initializer: M.() -> T?) = Kapsules.get(this).optional(initializer)
+
+    /**
+     * Fetches [Kapsule] instance and calls [Kapsule.inject].
+     */
+    fun <M> Injects<M>.inject(module: M) {
+        Kapsules.get(this).inject(module)
     }
 }

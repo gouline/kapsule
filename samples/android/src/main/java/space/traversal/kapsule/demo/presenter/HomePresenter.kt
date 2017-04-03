@@ -11,6 +11,7 @@
 package space.traversal.kapsule.demo.presenter
 
 import android.content.Context
+import space.traversal.kapsule.Injects
 import space.traversal.kapsule.Kapsule
 import space.traversal.kapsule.demo.App
 import space.traversal.kapsule.demo.di.Module
@@ -18,13 +19,12 @@ import space.traversal.kapsule.demo.di.Module
 /**
  * Presenter for home screen.
  */
-class HomePresenter(context: Context) : Presenter<HomeView>() {
+class HomePresenter(context: Context) : Presenter<HomeView>(), Injects<Module> {
 
-    private val kap = Kapsule<Module>()
-    private val dao by kap { dao }
+    private val dao by required { dao }
 
     init {
-        kap.inject(App.module(context))
+        inject(App.module(context))
     }
 
     /**

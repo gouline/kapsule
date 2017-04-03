@@ -8,28 +8,30 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
+package space.traversal.kapsule
 
-import space.traversal.kapsule.Injects
-import space.traversal.kapsule.demo.di.Module
-
-fun main(args: Array<String>) {
-    val demo = Demo(Context())
-    println("First name: ${demo.firstName}")
-    println("Last name: ${demo.lastName}")
-    println("Emails: ${demo.emails}")
-}
+import junit.framework.TestCase
+import org.junit.Test
+import org.omg.CORBA.Object
 
 /**
- * Demo app definition.
+ * Test case for [Kapsules].
  */
-class Demo(context: Context) : Injects<Module> {
+class KapsulesTest : TestCase() {
 
-    var firstName by required { firstName }
-    val lastName by optional { lastName }
-    val emails by required { emails }
+    @Test fun testFetch() {
+        Kapsules.instances.clear()
+        val caller = object : Injects<Object> {}
+        assertEquals(null, Kapsules.fetch(caller))
+        assertEquals(0, Kapsules.instances.size)
 
-    init {
-        inject(context.module)
+    }
+
+    @Test fun testGet() {
+        Kapsules.instances.clear()
+        val caller = object : Injects<Object> {}
+        val kap = Kapsules.get(caller)
+        assertEquals(kap, Kapsules.get(caller))
+        assertEquals(1, Kapsules.instances.size)
     }
 }

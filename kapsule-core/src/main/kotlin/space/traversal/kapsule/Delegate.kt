@@ -21,7 +21,8 @@ import kotlin.reflect.KProperty
  */
 sealed class Delegate<in M, T>(internal val initializer: M.() -> T?) {
 
-    internal var value: T? = null
+    var value: T? = null
+        internal set
 
     /**
      * Initializes value from the injection module.

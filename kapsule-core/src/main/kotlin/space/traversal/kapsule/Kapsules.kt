@@ -8,28 +8,31 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package space.traversal.kapsule.demo
+package space.traversal.kapsule
 
-import space.traversal.kapsule.Injects
-import space.traversal.kapsule.demo.di.Module
-
-fun main(args: Array<String>) {
-    val demo = Demo(Context())
-    println("First name: ${demo.firstName}")
-    println("Last name: ${demo.lastName}")
-    println("Emails: ${demo.emails}")
-}
+import space.traversal.kapsule.util.CallerMap
 
 /**
- * Demo app definition.
+ * Static storage of [Kapsule] instances.
  */
-class Demo(context: Context) : Injects<Module> {
+object Kapsules {
 
-    var firstName by required { firstName }
-    val lastName by optional { lastName }
-    val emails by required { emails }
+    internal val instances = CallerMap<Injects<*>, Kapsule<*>>()
 
-    init {
-        inject(context.module)
-    }
+    /**
+     * Retrieves active instance of [Kapsule] or creates a new one.
+     *
+     * @param caller Injection caller instance, used as lookup key.
+     * @return Stored or new instance.
+     */
+    fun <M> get(caller: Injects<M>) = fetch(caller) ?: Kapsule<M>().apply { instances[caller] = this }
+
+    /**
+     * Fetches stored instance.
+     *
+     * @param caller Injection caller instance, used as lookup key.
+     * @return Stored instance or null.
+     */
+    @Suppress("UNCHECKED_CAST")
+    internal fun <M> fetch(caller: Injects<M>) = instances[caller] as? Kapsule<M>
 }
