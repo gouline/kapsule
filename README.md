@@ -32,12 +32,12 @@ Basic injection can be set up in just two steps.
 
 Define a module to provide the injected values. It can be a regular Kotlin class, so feel free to initialize properties however you like (including `lazy` expressions and custom getters).
 
-    ```
-    class Module {
-        val name = "SomeName"
-        val manager get() = Manager()
-    }
-    ```
+```
+class Module {
+    val name = "SomeName"
+    val manager get() = Manager()
+}
+```
 
 This will provide the same instance of `name` and a new instance of `Manager` for every property that requires it. 
 
