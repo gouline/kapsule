@@ -26,7 +26,7 @@ To accomplish all of these, Kapsule is based on [delegation](http://kotlinlang.o
   
 ## Getting started
 
-Basic injection can be set up in just two steps.
+Basic injection can be set up in just three steps.
 
 ### Step 1: Create a module
 
@@ -41,22 +41,40 @@ class Module {
 
 This will provide the same instance of `name` and a new instance of `Manager` for every property that requires it. 
 
-### Step 2: Inject properties
+### Step 2: Store module instance
 
-Let's say you have a class `Screen` that needs these values. You need to indicate the target module by implementing `Injects<Module>` interface with the target module and request uninitialized delegates for your properties.    
+The module instance can be stored inside your app's `Application` instance. 
+Modify your existing `Application` class or create a new one (do not forget to add it inside `AndroidManifest.xml`).
 
 ~~~
-class Screen : Injects<Module> {
-    private val name by required { name }
-    private val manager by required { manager }
+class Application : Application() {
 
-    init {
-        inject(Application.module)
+    companion object {
+        /**
+         * Retrieves module from any context.
+         */
+        fun module(context: Context) = (context.applicationContext as Application).module
     }
+
+    internal var module = Module()
 }
 ~~~
 
-The function passed for each call retrieves the value in `Module` that the given property expects. 
+### Step 3: Inject properties
+
+Let's say you have a class `ExampleActivity` that needs these values. You need to indicate the target module by implementing `Injects<Module>` interface with the target module and request uninitialized delegates for your properties. The function passed for each call retrieves the value in `Module` that the given property expects. 
+
+~~~
+class ExampleActivity : AppCompatActivity(), Injects<Module> {
+    private val name by required { name }
+    private val manager by required { manager }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject(Application.module(this))
+    }
+}
+~~~
 
 Once you obtain the module instance, which can be stored in the application context, use it to inject the Kapsule and hence initialize the values of the above properties (this can be done in an asynchronous callback method, e.g. `onCreate()` in Android).
 
