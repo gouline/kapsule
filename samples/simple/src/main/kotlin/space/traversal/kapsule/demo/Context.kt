@@ -10,18 +10,19 @@
 
 package space.traversal.kapsule.demo
 
+import space.traversal.kapsule.demo.di.MainDataModule
+import space.traversal.kapsule.demo.di.MainLogicModule
 import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.demo.di.MainContactsModule
-import space.traversal.kapsule.demo.di.MainPersonModule
+import space.traversal.kapsule.transitive
 
 /**
  * Basic concept of application "context".
  */
 open class Context {
 
-    val domain = "example.com"
-
+    @Suppress("LeakingThis")
     open val module = Module(
-            person = MainPersonModule(),
-            contacts = MainContactsModule(this))
+            data = MainDataModule(),
+            logic = MainLogicModule())
+            .transitive()
 }

@@ -12,12 +12,11 @@ package space.traversal.kapsule.demo
 
 import space.traversal.kapsule.Injects
 import space.traversal.kapsule.demo.di.Module
+import space.traversal.kapsule.inject
+import space.traversal.kapsule.required
 
 fun main(args: Array<String>) {
-    val demo = Demo(Context())
-    println("First name: ${demo.firstName}")
-    println("Last name: ${demo.lastName}")
-    println("Emails: ${demo.emails}")
+    Demo(Context()).run()
 }
 
 /**
@@ -25,11 +24,19 @@ fun main(args: Array<String>) {
  */
 class Demo(context: Context) : Injects<Module> {
 
-    var firstName by required { firstName }
-    val lastName by optional { lastName }
-    val emails by required { emails }
+    var userDao by required { userDao }
+    val stateDao by required { stateDao }
+    val auth by required { auth }
 
     init {
         inject(context.module)
+    }
+
+    fun run() {
+        auth.authenticate()
+        println("First name: ${userDao.firstName}")
+        println("Last name: ${userDao.lastName}")
+        println("Emails: ${userDao.email}")
+        println("State: ${stateDao.code}")
     }
 }

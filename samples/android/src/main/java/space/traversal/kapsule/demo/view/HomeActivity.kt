@@ -17,12 +17,13 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import space.traversal.kapsule.Injects
-import space.traversal.kapsule.Kapsule
 import space.traversal.kapsule.demo.App
 import space.traversal.kapsule.demo.R
 import space.traversal.kapsule.demo.di.Module
 import space.traversal.kapsule.demo.presenter.HomePresenter
 import space.traversal.kapsule.demo.presenter.HomeView
+import space.traversal.kapsule.inject
+import space.traversal.kapsule.required
 
 /**
  * View for [HomePresenter].

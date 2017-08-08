@@ -15,6 +15,7 @@ import android.content.Context
 import space.traversal.kapsule.demo.di.MainAndroidModule
 import space.traversal.kapsule.demo.di.MainDataModule
 import space.traversal.kapsule.demo.di.Module
+import space.traversal.kapsule.transitive
 
 /**
  * Custom application class.
@@ -29,9 +30,11 @@ open class App : Application() {
         fun module(context: Context) = (context.applicationContext as App).module
     }
 
+    @Suppress("LeakingThis")
     private val module = createModule()
 
     open protected fun createModule() = Module(
             android = MainAndroidModule(this),
             data = MainDataModule(this))
+            .transitive()
 }

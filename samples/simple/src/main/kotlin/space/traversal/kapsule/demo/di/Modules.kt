@@ -10,26 +10,37 @@
 
 package space.traversal.kapsule.demo.di
 
+import space.traversal.kapsule.HasModules
+import space.traversal.kapsule.demo.mock.Auth
+import space.traversal.kapsule.demo.mock.StateDao
+import space.traversal.kapsule.demo.mock.UserDao
+
 /**
  * Application module.
  */
 class Module(
-        person: PersonModule,
-        contacts: ContactsModule) :
-        PersonModule by person,
-        ContactsModule by contacts
+        data: DataModule,
+        logic: LogicModule) :
+        DataModule by data,
+        LogicModule by logic,
+        HasModules {
 
-/**
- * Person module, provides basic user information.
- */
-interface PersonModule {
-    val firstName: String
-    val lastName: String? // This one is optional
+    override val modules = setOf(data, logic)
 }
 
 /**
- * Contacts module, provides user contact information.
+ * Module for data providers.
  */
-interface ContactsModule {
-    val emails: List<String>
+interface DataModule {
+
+    val userDao: UserDao
+    val stateDao: StateDao
+}
+
+/**
+ * Module for logic objects.
+ */
+interface LogicModule {
+
+    val auth: Auth
 }
