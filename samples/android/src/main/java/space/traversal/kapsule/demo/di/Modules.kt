@@ -12,6 +12,7 @@ package space.traversal.kapsule.demo.di
 
 import android.content.SharedPreferences
 import android.view.LayoutInflater
+import space.traversal.kapsule.HasModules
 import space.traversal.kapsule.demo.data.Dao
 
 /**
@@ -21,7 +22,11 @@ class Module(
         android: AndroidModule,
         data: DataModule) :
         AndroidModule by android,
-        DataModule by data
+        DataModule by data,
+        HasModules {
+
+    override val modules = setOf(android, data)
+}
 
 /**
  * Module for Android objects.

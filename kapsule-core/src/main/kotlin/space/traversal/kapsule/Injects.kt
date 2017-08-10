@@ -8,27 +8,28 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+@file:Suppress("unused")
+
 package space.traversal.kapsule
 
 /**
  * Injection interface.
  */
-interface Injects<M> {
+interface Injects<M>
 
-    /**
-     * Fetches [Kapsule] instance and calls [Kapsule.required].
-     */
-    fun <T> required(initializer: M.() -> T) = Kapsules.get(this).required(initializer)
+/**
+ * Fetches [Kapsule] instance and calls [Kapsule.required].
+ */
+fun <M, T> Injects<M>.required(initializer: M.() -> T) = Kapsules.get(this).required(initializer)
 
-    /**
-     * Fetches [Kapsule] instance and calls [Kapsule.optional].
-     */
-    fun <T> optional(initializer: M.() -> T?) = Kapsules.get(this).optional(initializer)
+/**
+ * Fetches [Kapsule] instance and calls [Kapsule.optional].
+ */
+fun <M, T> Injects<M>.optional(initializer: M.() -> T?) = Kapsules.get(this).optional(initializer)
 
-    /**
-     * Fetches [Kapsule] instance and calls [Kapsule.inject].
-     */
-    fun <M> Injects<M>.inject(module: M) {
-        Kapsules.get(this).inject(module)
-    }
+/**
+ * Fetches [Kapsule] instance and calls [Kapsule.inject].
+ */
+fun <M> Injects<M>.inject(module: M) {
+    Kapsules.get(this).inject(module)
 }

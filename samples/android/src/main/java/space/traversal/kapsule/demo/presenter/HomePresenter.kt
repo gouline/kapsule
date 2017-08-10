@@ -12,9 +12,10 @@ package space.traversal.kapsule.demo.presenter
 
 import android.content.Context
 import space.traversal.kapsule.Injects
-import space.traversal.kapsule.Kapsule
 import space.traversal.kapsule.demo.App
 import space.traversal.kapsule.demo.di.Module
+import space.traversal.kapsule.inject
+import space.traversal.kapsule.required
 
 /**
  * Presenter for home screen.

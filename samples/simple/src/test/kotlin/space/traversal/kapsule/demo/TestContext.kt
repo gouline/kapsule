@@ -11,8 +11,9 @@
 package space.traversal.kapsule.demo
 
 import space.traversal.kapsule.demo.di.Module
-import space.traversal.kapsule.demo.di.TestContactsModule
-import space.traversal.kapsule.demo.di.TestPersonModule
+import space.traversal.kapsule.demo.di.TestLogicModule
+import space.traversal.kapsule.demo.di.TestDataModule
+import space.traversal.kapsule.transitive
 
 /**
  * Test implementation of [Context].
@@ -20,6 +21,7 @@ import space.traversal.kapsule.demo.di.TestPersonModule
 class TestContext : Context() {
 
     override val module = Module(
-            person = TestPersonModule(),
-            contacts = TestContactsModule())
+            data = TestDataModule(),
+            logic = TestLogicModule())
+            .transitive()
 }

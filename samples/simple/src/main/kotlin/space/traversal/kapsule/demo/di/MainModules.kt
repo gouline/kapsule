@@ -10,26 +10,28 @@
 
 package space.traversal.kapsule.demo.di
 
-import space.traversal.kapsule.demo.Context
+import space.traversal.kapsule.Injects
+import space.traversal.kapsule.demo.mock.Auth
+import space.traversal.kapsule.demo.mock.StateDao
+import space.traversal.kapsule.demo.mock.UserDao
+import space.traversal.kapsule.required
 
 /**
- * Main implementation of [PersonModule].
+ * Main implementation of [DataModule].
  */
-class MainPersonModule : PersonModule {
+class MainDataModule : DataModule {
 
-    override val firstName = "Joe"
-    override val lastName = "Bloggs"
+    override val stateDao = StateDao()
+    override val userDao = UserDao()
 }
 
 /**
- * Main implementation of [ContactsModule].
+ * Main implementation of [LogicModule].
  */
-class MainContactsModule(context: Context) : ContactsModule {
+class MainLogicModule : LogicModule, Injects<DataModule> {
 
-    /**
-     * List of domain-specific email addresses.
-     */
-    override val emails = listOf(
-            "jbloggs@${context.domain}",
-            "joe@${context.domain}")
+    private val stateDao by required { stateDao }
+    private val userDao by required { userDao }
+
+    override val auth get() = Auth(userDao, stateDao)
 }

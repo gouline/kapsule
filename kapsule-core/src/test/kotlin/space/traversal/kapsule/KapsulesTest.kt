@@ -24,7 +24,6 @@ class KapsulesTest : TestCase() {
         val caller = object : Injects<Object> {}
         assertEquals(null, Kapsules.fetch(caller))
         assertEquals(0, Kapsules.instances.size)
-
     }
 
     @Test fun testGet() {

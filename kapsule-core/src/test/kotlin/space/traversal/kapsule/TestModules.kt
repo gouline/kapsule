@@ -23,4 +23,5 @@ class OptionalModule(val value: String?)
 /**
  * Test module with multiple values.
  */
+@Suppress("unused")
 class MultiModule(val optString: String?, val reqInt: Int, val unused: String)

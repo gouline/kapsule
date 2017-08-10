@@ -10,19 +10,23 @@
 
 package space.traversal.kapsule.demo.di
 
-/**
- * Test implementation of [PersonModule].
- */
-class TestPersonModule : PersonModule {
+import space.traversal.kapsule.demo.mock.Auth
+import space.traversal.kapsule.demo.mock.StateDao
+import space.traversal.kapsule.demo.mock.UserDao
 
-    override val firstName = "Jane"
-    override val lastName = "Doe"
+/**
+ * Test implementation of [DataModule].
+ */
+class TestDataModule : DataModule {
+
+    override val userDao = UserDao()
+    override val stateDao = StateDao()
 }
 
 /**
- * Test implementation of [ContactsModule].
+ * Test implementation of [LogicModule].
  */
-class TestContactsModule : ContactsModule {
+class TestLogicModule : LogicModule {
 
-    override val emails = listOf("jdoe@example.org", "jane@example.org")
+    override val auth = Auth(UserDao(), StateDao(), true)
 }
