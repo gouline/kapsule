@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 0.3 (2017-08-10)
+
+* Support for transitive dependencies via `HasModules` interface and `transitive()` call on the root module.
+* Functions `required()`, `optional()` and `inject()` extracted from `Injects<M>` interface into separate extension functions (this will require fixes to imports in files using them).
+
 ## Version 0.2 (2017-04-03)
 
 * Automatic injection by implementing `Injects` interface.
