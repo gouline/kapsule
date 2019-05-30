@@ -20,14 +20,17 @@ import kotlin.reflect.KProperty
  */
 class KapsuleTest : TestCase() {
 
-    @Test fun testRequired() {
+    @Suppress("USELESS_IS_CHECK")
+    @Test
+    fun testRequired() {
         val kap = Kapsule<MultiModule>()
         assertTrue(kap.required { reqInt } is Delegate.Required)
-        assertTrue(kap<Int> { reqInt } is Delegate.Required)
+        assertTrue(kap { reqInt } is Delegate.Required)
         assertTrue(kap.optional<Int?> { reqInt } is Delegate.Optional)
     }
 
-    @Test fun testDelegates() {
+    @Test
+    fun testDelegates() {
         val kap = Kapsule<MultiModule>()
         for (i in 0..2) {
             val initializer: (MultiModule.() -> Int) = { reqInt }
@@ -39,7 +42,8 @@ class KapsuleTest : TestCase() {
         assertEquals(3, kap.delegates.count())
     }
 
-    @Test fun testInject() {
+    @Test
+    fun testInject() {
         val kap = Kapsule<MultiModule>()
         val prop = Mockito.mock(KProperty::class.java)
 
@@ -54,7 +58,8 @@ class KapsuleTest : TestCase() {
         }
     }
 
-    @Test fun testTarget_pre() {
+    @Test
+    fun testTarget_pre() {
         val target = Target()
 
         assertEquals(null, target.optString)
@@ -67,7 +72,8 @@ class KapsuleTest : TestCase() {
         }
     }
 
-    @Test fun testTarget_multiple() {
+    @Test
+    fun testTarget_multiple() {
         val target = Target()
 
         listOf(MultiModule("test1", 3, "abc123"),
@@ -82,7 +88,7 @@ class KapsuleTest : TestCase() {
 
         val kap = Kapsule<MultiModule>()
         var optString by kap.optional<String?> { optString }
-        val reqInt by kap<Int> { reqInt }
+        val reqInt by kap { reqInt }
 
         fun inject(module: MultiModule) {
             kap.inject(module)

@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.0 (2019-05-30)
+
+* Update dependency versions.
+* Promote to stable release.
+
 ## Version 0.3 (2017-08-10)
 
 * Support for transitive dependencies via `HasModules` interface and `transitive()` call on the root module.

@@ -12,7 +12,6 @@ package space.traversal.kapsule
 
 import junit.framework.TestCase
 import org.junit.Test
-import org.omg.CORBA.Object
 
 /**
  * Test case for [Kapsules].
@@ -21,14 +20,14 @@ class KapsulesTest : TestCase() {
 
     @Test fun testFetch() {
         Kapsules.instances.clear()
-        val caller = object : Injects<Object> {}
+        val caller = object : Injects<Any> {}
         assertEquals(null, Kapsules.fetch(caller))
         assertEquals(0, Kapsules.instances.size)
     }
 
     @Test fun testGet() {
         Kapsules.instances.clear()
-        val caller = object : Injects<Object> {}
+        val caller = object : Injects<Any> {}
         val kap = Kapsules.get(caller)
         assertEquals(kap, Kapsules.get(caller))
         assertEquals(1, Kapsules.instances.size)

@@ -20,7 +20,8 @@ import kotlin.reflect.KProperty
  */
 class DelegateTest : TestCase() {
 
-    @Test fun testInitialize_required() {
+    @Test
+    fun testInitialize_required() {
         val delegate = Delegate.Required<RequiredModule, String> { value }
         assertEquals(null, delegate.value)
 
@@ -31,7 +32,8 @@ class DelegateTest : TestCase() {
         }
     }
 
-    @Test fun testInitialize_optional() {
+    @Test
+    fun testInitialize_optional() {
         val delegate = Delegate.Optional<OptionalModule, String?> { value }
         assertEquals(null, delegate.value)
 
@@ -42,7 +44,8 @@ class DelegateTest : TestCase() {
         }
     }
 
-    @Test fun testGetValue_required() {
+    @Test
+    fun testGetValue_required() {
         val delegate = Delegate.Required<RequiredModule, String> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
@@ -58,7 +61,8 @@ class DelegateTest : TestCase() {
         assertEquals(expected, delegate.getValue(null, prop))
     }
 
-    @Test fun testGetValue_optional() {
+    @Test
+    fun testGetValue_optional() {
         val delegate = Delegate.Optional<OptionalModule, String?> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
@@ -69,7 +73,8 @@ class DelegateTest : TestCase() {
         assertEquals(expected, delegate.getValue(null, prop))
     }
 
-    @Test fun testSetValue_required() {
+    @Test
+    fun testSetValue_required() {
         val delegate = Delegate.Required<RequiredModule, String> { value }
         val prop = Mockito.mock(KProperty::class.java)
 
@@ -79,7 +84,8 @@ class DelegateTest : TestCase() {
         }
     }
 
-    @Test fun testSetValue_optional() {
+    @Test
+    fun testSetValue_optional() {
         val delegate = Delegate.Optional<OptionalModule, String?> { value }
         val prop = Mockito.mock(KProperty::class.java)
 

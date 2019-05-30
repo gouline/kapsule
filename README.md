@@ -2,8 +2,6 @@
 
 Minimalist dependency injection library for Kotlin.
 
-**Note:** Kapsule is currently in pre-release stages of development. While every milestone build is well-tested and ready for use, breaking changes can be introduced without warning. Once version 1.0 is released, the changes will become more gradual.
-
 Why create another dependency injection library? Here are the objectives pursued by Kapsule:
 
 * Simple features that most projects will have use for

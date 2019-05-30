@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = kotlin_max_version
+    ext.kotlin_version = kotlin_version
 
     repositories {
         google()
@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
@@ -18,12 +18,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "space.traversal.kapsule.demo"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -37,16 +37,17 @@ android {
 }
 
 repositories {
+    google()
     jcenter()
 }
 
 dependencies {
-    compile project(':kapsule-core')
+    implementation project(':kapsule-core')
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.2.2'
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.2.2'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
 }
