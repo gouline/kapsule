@@ -1,7 +1,6 @@
-sudo: false
-
+dist: bionic
 language: java
-jdk: oraclejdk8
+jdk: openjdk11
 
 env:
   - EXCLUDE_SAMPLES=true
