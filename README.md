@@ -19,8 +19,8 @@ To accomplish all of these, Kapsule is based on [delegation](http://kotlinlang.o
   
 ## Documentation
 
-* [User documentation](https://traversal.space/kapsule)
-* [API reference](https://traversal.space/docs/kapsule)
+* [User documentation](https://sydspace.org/kapsule)
+* [API reference](https://sydspace.org/kapsule/docs)
 * [Code samples](samples)
 
 ## License
