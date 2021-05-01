@@ -1,4 +1,4 @@
-# Kapsule [![Build Status](https://travis-ci.org/traversals/kapsule.svg?branch=master)](https://travis-ci.org/traversals/kapsule) 
+# Kapsule [![Build Status](https://travis-ci.org/gouline/kapsule.svg?branch=master)](https://travis-ci.org/gouline/kapsule) 
 
 Minimalist dependency injection library for Kotlin.
 
@@ -19,8 +19,8 @@ To accomplish all of these, Kapsule is based on [delegation](http://kotlinlang.o
   
 ## Documentation
 
-* [User documentation](https://sydspace.org/kapsule)
-* [API reference](https://sydspace.org/kapsule/docs)
+* [User documentation](https://gouline.net/kapsule)
+* [API reference](https://gouline.net/kapsule/docs)
 * [Code samples](samples)
 
 ## License
