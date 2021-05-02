@@ -12,7 +12,7 @@ plugins {
 
 apply plugin: 'kotlin'
 
-mainClassName = 'space.traversal.kapsule.demo.DemoKt'
+mainClassName = 'net.gouline.kapsule.demo.DemoKt'
 
 dependencies {
     compile project(':kapsule-core')

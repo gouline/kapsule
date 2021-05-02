@@ -23,7 +23,7 @@ dokka {
 
     linkMapping {
         dir = "src/main/kotlin"
-        url = "https://github.com/traversals/kapsule/blob/master/${project.name}/src/main/kotlin"
+        url = "https://github.com/gouline/kapsule/blob/master/${project.name}/src/main/kotlin"
         suffix = "#L"
     }
 }
