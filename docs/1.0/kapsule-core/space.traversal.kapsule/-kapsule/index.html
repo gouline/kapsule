@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Kapsule - kapsule-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kapsule-core</a>&nbsp;/&nbsp;<a href="../index.html">space.traversal.kapsule</a>&nbsp;/&nbsp;<a href="./index.html">Kapsule</a><br/>
+<br/>
+<h1>Kapsule</h1>
+<code><span class="keyword">class </span><span class="identifier">Kapsule</span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span></code>
+<p>Kapsule injector.</p>
+<p><strong>Parameters</strong><br/>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Kapsule</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Kapsule injector.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="inject.html">inject</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">inject</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule.Kapsule$inject(space.traversal.kapsule.Kapsule.M)/module">module</span><span class="symbol">:</span>&nbsp;<a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Initializes property delegates with provided functions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule.Kapsule$invoke(kotlin.Function1((space.traversal.kapsule.Kapsule.M, space.traversal.kapsule.Kapsule.invoke.T)))/initializer">initializer</span><span class="symbol">:</span>&nbsp;<a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="invoke.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-delegate/-required/index.html"><span class="identifier">Delegate.Required</span></a><span class="symbol">&lt;</span><a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">,</span>&nbsp;<a href="invoke.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Shortcut for <a href="required.html">required</a> by invoking the class like a function.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="optional.html">optional</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">optional</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule.Kapsule$optional(kotlin.Function1((space.traversal.kapsule.Kapsule.M, space.traversal.kapsule.Kapsule.optional.T)))/initializer">initializer</span><span class="symbol">:</span>&nbsp;<a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="optional.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-delegate/-optional/index.html"><span class="identifier">Delegate.Optional</span></a><span class="symbol">&lt;</span><a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">,</span>&nbsp;<a href="optional.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Creates and registers delegate for an optional (nullable) injectable property.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="required.html">required</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">required</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule.Kapsule$required(kotlin.Function1((space.traversal.kapsule.Kapsule.M, space.traversal.kapsule.Kapsule.required.T)))/initializer">initializer</span><span class="symbol">:</span>&nbsp;<a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="required.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-delegate/-required/index.html"><span class="identifier">Delegate.Required</span></a><span class="symbol">&lt;</span><a href="index.html#M"><span class="identifier">M</span></a><span class="symbol">,</span>&nbsp;<a href="required.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Creates and registers delegate for a required (non-null) injectable property.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
