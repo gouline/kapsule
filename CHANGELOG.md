@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.1 (2021-05-08)
+
+* Change package prefix from `space.traversal` to `net.gouline` after repository migration.
+* Remove Bintray publishing process.
+
 ## Version 1.0 (2019-05-30)
 
 * Update dependency versions.

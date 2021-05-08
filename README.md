@@ -43,18 +43,20 @@ To accomplish all of these, Kapsule is based on [delegation](http://kotlinlang.o
 To use Kapsule in your project, include it as a dependency.
 
 #### Using Gradle:
+
 ~~~gradle
 dependencies {
-    compile "space.traversal.kapsule:kapsule-core:1.0"
+    compile "net.gouline.kapsule:kapsule-core:1.1"
 }
 ~~~
 
 #### Or Maven:
+
 ~~~xml
 <dependency>
-    <groupId>space.traversal.kapsule</groupId>
+    <groupId>net.gouline.kapsule</groupId>
     <artifactId>kapsule-core</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ~~~
 

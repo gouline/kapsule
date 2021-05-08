@@ -1,5 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
 apply plugin: 'org.jetbrains.dokka'
 
 ext {
@@ -52,56 +52,48 @@ def pomConfig = {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            groupId project['publish.groupId']
-            artifactId project['publish.artifactId']
-            version project['publish.version']
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('name', project['publish.name'])
-                root.appendNode('description', project['publish.description'])
-                root.appendNode('url', project['publish.url'])
-                root.children().last() + pomConfig
+if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+                groupId project['publish.groupId']
+                artifactId project['publish.artifactId']
+                version project['publish.version']
+                pom.withXml {
+                    def root = asNode()
+                    root.appendNode('name', project['publish.name'])
+                    root.appendNode('description', project['publish.description'])
+                    root.appendNode('url', project['publish.url'])
+                    root.children().last() + pomConfig
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username project['ossrhUsername']
+                    password project['ossrhPassword']
+                }
             }
         }
     }
-}
 
-if (hasProperty('bintray.user') && hasProperty('bintray.key') &&
-        hasProperty('ossrh.username') && hasProperty('ossrh.password')) {
-    bintray {
-        user = project['bintray.user']
-        key = project['bintray.key']
-        publications = ['mavenJava']
+    signing {
+        sign publishing.publications.mavenJava
+    }
 
-        dryRun = false
-        publish = true
-
-        pkg {
-            name = project['bintray.package']
-            repo = project['bintray.repo']
-            userOrg = project['bintray.userOrg']
-            desc = project['publish.description']
-            licenses = [project['publish.license.name']]
-            websiteUrl = project['publish.url']
-            vcsUrl = project['publish.vcsHttp']
-            version {
-                released = new Date()
-                name = project['publish.version']
-                vcsTag = "v${project['publish.version']}"
-                gpg {
-                    sign = true
-                }
-                mavenCentralSync {
-                    user = project['ossrh.username']
-                    password = project['ossrh.password']
-                }
-            }
+    publish.dependsOn {
+        if (!rootProject.hasProperty('ossrhUsername') || !rootProject.hasProperty('ossrhPassword')) {
+            throw new IllegalArgumentException("Properties 'ossrhUsername' and 'ossrhPassword'" +
+                    " must be defined to access the Sonatype repository!")
         }
     }
 }
