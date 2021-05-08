@@ -345,13 +345,13 @@ For sample projects using Kapsule, see the [samples](./samples) directory.
 ## Javadocs
 
 * Version 1.0
-    - [kapsule-core](https://gouline.net/kapsule/docs/1.0/kapsule-core/index.html)
+    - [kapsule-core](https://gouline.net/kapsule/1.0/kapsule-core/index.html)
 * Version 0.3
-    - [kapsule-core](https://gouline.net/kapsule/docs/0.3/kapsule-core/index.html)
+    - [kapsule-core](https://gouline.net/kapsule/0.3/kapsule-core/index.html)
 * Version 0.2
-    - [kapsule-core](https://gouline.net/kapsule/docs/0.2/kapsule-core/index.html)
+    - [kapsule-core](https://gouline.net/kapsule/0.2/kapsule-core/index.html)
 * Version 0.1
-    - [kapsule-core](https://gouline.net/kapsule/docs/0.1/kapsule-core/index.html)
+    - [kapsule-core](https://gouline.net/kapsule/0.1/kapsule-core/index.html)
 
 ## License
 
