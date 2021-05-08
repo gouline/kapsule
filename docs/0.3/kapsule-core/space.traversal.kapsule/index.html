@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>space.traversal.kapsule - kapsule-core</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kapsule-core</a>&nbsp;/&nbsp;<a href=".">space.traversal.kapsule</a><br/>
+<br/>
+<h2>Package space.traversal.kapsule</h2>
+<p>Kapsule API</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-delegate/index.html">Delegate</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Delegate</span><span class="symbol">&lt;</span><span class="keyword">in</span>&nbsp;<span class="identifier">M</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Kapsule property delegate.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-has-modules/index.html">HasModules</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">HasModules</span></code>
+<p>Module with other submodules attached via delegation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-injects.html">Injects</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Injects</span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span></code>
+<p>Injection interface.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-kapsule/index.html">Kapsule</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Kapsule</span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span></code>
+<p>Kapsule injector.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-kapsules/index.html">Kapsules</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">Kapsules</span></code>
+<p>Static storage of <a href="-kapsule/index.html">Kapsule</a> instances.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-transitive-injection-exception/index.html">TransitiveInjectionException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TransitiveInjectionException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/ClassCastException.html"><span class="identifier">ClassCastException</span></a></code>
+<p>Class cast exception indicating that a submodule depends on a module that
+is not a descendant of the root module.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="inject.html">inject</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span> <a href="-injects.html"><span class="identifier">Injects</span></a><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">inject</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule$inject(space.traversal.kapsule.Injects((space.traversal.kapsule.inject.M)), space.traversal.kapsule.inject.M)/module">module</span><span class="symbol">:</span>&nbsp;<span class="identifier">M</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Fetches <a href="-kapsule/index.html">Kapsule</a> instance and calls <a href="-kapsule/inject.html">Kapsule.inject</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="optional.html">optional</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="-injects.html"><span class="identifier">Injects</span></a><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">optional</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule$optional(space.traversal.kapsule.Injects((space.traversal.kapsule.optional.M)), kotlin.Function1((space.traversal.kapsule.optional.M, space.traversal.kapsule.optional.T)))/initializer">initializer</span><span class="symbol">:</span>&nbsp;<span class="identifier">M</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="-delegate/-optional/index.html"><span class="identifier">Optional</span></a><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">,</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Fetches <a href="-kapsule/index.html">Kapsule</a> instance and calls <a href="-kapsule/optional.html">Kapsule.optional</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="required.html">required</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="-injects.html"><span class="identifier">Injects</span></a><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">required</span><span class="symbol">(</span><span class="identifier" id="space.traversal.kapsule$required(space.traversal.kapsule.Injects((space.traversal.kapsule.required.M)), kotlin.Function1((space.traversal.kapsule.required.M, space.traversal.kapsule.required.T)))/initializer">initializer</span><span class="symbol">:</span>&nbsp;<span class="identifier">M</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><a href="-delegate/-required/index.html"><span class="identifier">Required</span></a><span class="symbol">&lt;</span><span class="identifier">M</span><span class="symbol">,</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Fetches <a href="-kapsule/index.html">Kapsule</a> instance and calls <a href="-kapsule/required.html">Kapsule.required</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transitive.html">transitive</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">M</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-has-modules/index.html"><span class="identifier">HasModules</span></a><span class="symbol">&gt;</span> <span class="identifier">M</span><span class="symbol">.</span><span class="identifier">transitive</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">M</span></code>
+<p>Injects root module into any submodules with transitive dependencies.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
