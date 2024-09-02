@@ -2,7 +2,7 @@
 
 [![GitHub Actions](https://github.com/gouline/kapsule/actions/workflows/master.yml/badge.svg)](https://github.com/gouline/kapsule/actions/workflows/master.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gouline/molot/blob/master/LICENSE)
-
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://gouline.github.io/kapsule/)
 
 Minimalist dependency injection library for Kotlin.
 
@@ -81,21 +81,7 @@ Our simple example provides the same instance of `name` and a new instance of `M
 
 ### Store Module Instance
 
-Store the root module in your application context (this will depend on your framework).
-
-On Android, you would use the `Application` instance for this. Don't forget to declare the `CustomApplication` class in `AndroidManifest.xml`.
-
-~~~kotlin
-class CustomApplication : Application() {
-    private var module = Module()
-	
-    companion object {
-        fun module(context: Context) = (context.applicationContext as Application).module
-    }
-}
-~~~
-
-The static function `module()` is how you will access the stored module from activities and fragments.
+Store the root module in your application context. This will depend on your framework, for example on Android, you would use the `Application` instance.
 
 ### Inject Properties
 
@@ -106,16 +92,15 @@ Now the injection target needs to be adjusted as follows:
 * Retrieve the module instance from the application context
 * Call `inject()` on the module to initialise the values
 
-Looking at the Android example, let's say you have a class `ExampleActivity` that needs these injected values. The function passed for each declaration retrieves the value from `Module` that the given property expects. 
+Looking at the example, let's say you have a class `Demo` that needs these injected values. The function passed for each declaration retrieves the value from `Module` that the given property expects. 
 
 ~~~kotlin
-class ExampleActivity : AppCompatActivity(), Injects<Module> {
+class Demo : Injects<Module> {
     private val name by required { name }
     private val manager by required { manager }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        inject(CustomApplication.module(this))
+    init {
+        inject(context.module)
     }
 }
 ~~~
@@ -317,7 +302,7 @@ Notice that you no longer need the `userDao` separately for that. Also note that
 You can do other stuff in your injection functions, like convert the injected value into something else that you need for the current context.
 
 ~~~kotlin
-class ExampleActivity : AppCompatActivity(), Injects<Module> {
+class Demo : Injects<Module> {
     private val authHttpClient by required { auth.httpClient }
     
     ...
@@ -347,17 +332,6 @@ class Screen {
 ## Samples
 
 For sample projects using Kapsule, see the [samples](./samples) directory. 
-
-## Javadocs
-
-* Version 1.0
-    - [kapsule-core](https://gouline.github.io/kapsule/1.0/kapsule-core/index.html)
-* Version 0.3
-    - [kapsule-core](https://gouline.github.io/kapsule/0.3/kapsule-core/index.html)
-* Version 0.2
-    - [kapsule-core](https://gouline.github.io/kapsule/0.2/kapsule-core/index.html)
-* Version 0.1
-    - [kapsule-core](https://gouline.github.io/kapsule/0.1/kapsule-core/index.html)
 
 ## License
 
