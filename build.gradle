@@ -7,11 +7,10 @@ buildscript {
     }
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18'
     }
 }
@@ -19,11 +18,11 @@ buildscript {
 subprojects {
     buildscript {
         repositories {
-            jcenter()
+            mavenCentral()
         }
     }
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }

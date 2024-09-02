@@ -1,4 +1,8 @@
-# Kapsule [![Build Status](https://travis-ci.org/gouline/kapsule.svg?branch=master)](https://travis-ci.org/gouline/kapsule) 
+# Kapsule 
+
+[![GitHub Actions](https://github.com/gouline/kapsule/actions/workflows/master.yml/badge.svg)](https://github.com/gouline/kapsule/actions/workflows/master.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gouline/molot/blob/master/LICENSE)
+
 
 Minimalist dependency injection library for Kotlin.
 
