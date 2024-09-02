@@ -37,7 +37,6 @@ To accomplish all of these, Kapsule is based on [delegation](http://kotlinlang.o
     - [Complex Dependencies](#complex-dependencies)
 	- [Manual Injection](#manual-injection)
 * [Samples](#samples)
-* [Javadocs](#javadocs)
 * [Links](#links)
 
 ## Getting Started
