@@ -20,7 +20,6 @@ import net.gouline.kapsule.transitive
  */
 open class Context {
 
-    @Suppress("LeakingThis")
     open val module = Module(
             data = MainDataModule(),
             logic = MainLogicModule())
