@@ -51,6 +51,7 @@ class DelegateTest {
         val prop = Mockito.mock(KProperty::class.java)
 
         try {
+            @Suppress("TestFailedLine")
             delegate.getValue(null, prop)
             assertTrue(false)
         } catch (e: NullPointerException) {

@@ -15,7 +15,7 @@ import net.gouline.kapsule.demo.di.Module
 import net.gouline.kapsule.inject
 import net.gouline.kapsule.required
 
-fun main(args: Array<String>) {
+fun main() {
     Demo(Context()).run()
 }
 
