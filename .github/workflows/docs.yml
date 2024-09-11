@@ -1,19 +1,15 @@
-name: Deploy docs
+name: docs
 
 on:
-  push:
-    branches: 
-      - master
-
-  workflow_dispatch:
+  release:
+    types:
+      - created
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -39,7 +35,7 @@ jobs:
 
       - name: Export docs
         env:
-          ORG_GRADLE_PROJECT_publishVersion: '1.1'
+          ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
         run: ./gradlew exportDocs
 
       - name: Setup Pages
