@@ -30,6 +30,12 @@ java {
     }
 }
 
+tasks.register<Jar>("dokkaJavadocJar") {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
 mavenPublishing {
     configure(
         KotlinJvm(

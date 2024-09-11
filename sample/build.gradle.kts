@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":kapsule-core"))
 
     testImplementation(libs.junit.jupiter.engine)
     testImplementation(libs.mockito.kotlin)

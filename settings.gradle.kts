@@ -3,4 +3,4 @@ plugins {
 }
 
 rootProject.name = "kapsule"
-include("core", "sample")
+include("kapsule-core", "sample")
