@@ -24,3 +24,13 @@ jobs:
 
       - name: Test
         run: ./gradlew build
+
+      - name: Publish a Python distribution to PyPI
+        if: github.event_name == 'release'
+        env:
+          ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.SIGNING_PASSPHRASE }}
+        run: ./gradlew publishMavenJavaPublicationToSonatypeRepository
