@@ -1,0 +1,33 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:net.gouline.kapsule////PointingToDeclaration/core/net.gouline.kapsule/index.html
+$dokka.location:net.gouline.kapsule//inject/net.gouline.kapsule.Injects[TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/core/net.gouline.kapsule/inject.html
+$dokka.location:net.gouline.kapsule//optional/net.gouline.kapsule.Injects[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])?]/PointingToDeclaration/core/net.gouline.kapsule/optional.html
+$dokka.location:net.gouline.kapsule//required/net.gouline.kapsule.Injects[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/core/net.gouline.kapsule/required.html
+$dokka.location:net.gouline.kapsule//transitive/TypeParam(bounds=[net.gouline.kapsule.HasModules])#/PointingToDeclaration/core/net.gouline.kapsule/transitive.html
+$dokka.location:net.gouline.kapsule/Delegate.Optional///PointingToDeclaration/core/net.gouline.kapsule/-delegate/-optional/index.html
+$dokka.location:net.gouline.kapsule/Delegate.Optional/Optional/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])?]/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-optional/-optional.html
+$dokka.location:net.gouline.kapsule/Delegate.Optional/getValue/#kotlin.Any?#kotlin.reflect.KProperty[*]/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-optional/get-value.html
+$dokka.location:net.gouline.kapsule/Delegate.Optional/setValue/#kotlin.Any?#kotlin.reflect.KProperty[*]#TypeParam(bounds=[kotlin.Any?])?/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-optional/set-value.html
+$dokka.location:net.gouline.kapsule/Delegate.Required///PointingToDeclaration/core/net.gouline.kapsule/-delegate/-required/index.html
+$dokka.location:net.gouline.kapsule/Delegate.Required/Required/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-required/-required.html
+$dokka.location:net.gouline.kapsule/Delegate.Required/getValue/#kotlin.Any?#kotlin.reflect.KProperty[*]/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-required/get-value.html
+$dokka.location:net.gouline.kapsule/Delegate.Required/setValue/#kotlin.Any?#kotlin.reflect.KProperty[*]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/core/net.gouline.kapsule/-delegate/-required/set-value.html
+$dokka.location:net.gouline.kapsule/Delegate///PointingToDeclaration/core/net.gouline.kapsule/-delegate/index.html
+$dokka.location:net.gouline.kapsule/Delegate/initialize/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/core/net.gouline.kapsule/-delegate/initialize.html
+$dokka.location:net.gouline.kapsule/Delegate/value/#/PointingToDeclaration/core/net.gouline.kapsule/-delegate/value.html
+$dokka.location:net.gouline.kapsule/HasModules///PointingToDeclaration/core/net.gouline.kapsule/-has-modules/index.html
+$dokka.location:net.gouline.kapsule/HasModules/modules/#/PointingToDeclaration/core/net.gouline.kapsule/-has-modules/modules.html
+$dokka.location:net.gouline.kapsule/Injects///PointingToDeclaration/core/net.gouline.kapsule/-injects/index.html
+$dokka.location:net.gouline.kapsule/Kapsule///PointingToDeclaration/core/net.gouline.kapsule/-kapsule/index.html
+$dokka.location:net.gouline.kapsule/Kapsule/Kapsule/#/PointingToDeclaration/core/net.gouline.kapsule/-kapsule/-kapsule.html
+$dokka.location:net.gouline.kapsule/Kapsule/inject/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/core/net.gouline.kapsule/-kapsule/inject.html
+$dokka.location:net.gouline.kapsule/Kapsule/invoke/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/core/net.gouline.kapsule/-kapsule/invoke.html
+$dokka.location:net.gouline.kapsule/Kapsule/optional/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])?]/PointingToDeclaration/core/net.gouline.kapsule/-kapsule/optional.html
+$dokka.location:net.gouline.kapsule/Kapsule/required/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/core/net.gouline.kapsule/-kapsule/required.html
+$dokka.location:net.gouline.kapsule/Kapsules///PointingToDeclaration/core/net.gouline.kapsule/-kapsules/index.html
+$dokka.location:net.gouline.kapsule/Kapsules/get/#net.gouline.kapsule.Injects[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/core/net.gouline.kapsule/-kapsules/get.html
+$dokka.location:net.gouline.kapsule/TransitiveInjectionException///PointingToDeclaration/core/net.gouline.kapsule/-transitive-injection-exception/index.html
+$dokka.location:net.gouline.kapsule/TransitiveInjectionException/TransitiveInjectionException/#java.lang.Class[*]/PointingToDeclaration/core/net.gouline.kapsule/-transitive-injection-exception/-transitive-injection-exception.html
+net.gouline.kapsule
+
