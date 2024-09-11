@@ -25,7 +25,7 @@ jobs:
       - name: Test
         run: ./gradlew build
 
-      - name: Publish a Python distribution to PyPI
+      - name: Publish to Sonatype
         if: github.event_name == 'release'
         env:
           ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
