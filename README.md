@@ -330,7 +330,7 @@ class Screen {
 
 ## Samples
 
-For sample projects using Kapsule, see the [samples](./samples) directory. 
+For a sample project using Kapsule, see the [sample](./sample) directory. 
 
 ## License
 
