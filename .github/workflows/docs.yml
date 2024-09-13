@@ -36,7 +36,7 @@ jobs:
       - name: Export docs
         env:
           ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
-        run: ./gradlew exportDocs
+        run: ./gradlew dokkaHtmlMultiModule
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

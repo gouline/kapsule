@@ -6,14 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     `java-library`
     alias(libs.plugins.maven.publish)
-    alias(libs.plugins.dokka)
-}
-
-group = property("publishGroupId").toString()
-version = property("publishVersion").toString()
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -24,16 +16,8 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-tasks.register<Jar>("dokkaJavadocJar") {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }
 
 mavenPublishing {
@@ -44,14 +28,14 @@ mavenPublishing {
         )
     )
 
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral(SonatypeHost.DEFAULT)
 
     signAllPublications()
 
     coordinates(
-        property("publishGroupId").toString(),
-        property("publishArtifactId").toString(),
-        property("publishVersion").toString(),
+        artifactId = name,
+        groupId = group.toString(),
+        version = version.toString(),
     )
 
     pom {
@@ -76,21 +60,4 @@ mavenPublishing {
             url.set(property("publishScmUrl").toString())
         }
     }
-}
-
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
-
-tasks.register<Copy>("exportDocs") {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    into("../docs")
-    with(copySpec {
-        from("build/dokka/html")
-    })
-    from(tasks.getByName("deleteDocs"), tasks.dokkaHtml)
-}
-
-tasks.register<Delete>("deleteDocs") {
-    delete("../docs")
 }

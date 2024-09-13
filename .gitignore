@@ -43,3 +43,6 @@ proguard/
 
 # Android Studio captures folder
 captures/
+
+# Generated Dokka docs
+/docs/
