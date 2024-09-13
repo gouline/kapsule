@@ -35,9 +35,10 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSPHRASE }}
         run: ./gradlew clean publishAndReleaseToMavenCentral --no-configuration-cache
 
-      - name: Release
+      - name: Release assets
         uses: softprops/action-gh-release@v2
         if: github.event_name == 'release'
         with:
           tag_name: ${{ github.event.release.tag_name }}
-          files: core/build/libs/*.jar
+          files: |
+            kapsule-core/build/libs/*.jar
