@@ -1,9 +1,8 @@
-import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 allprojects {
@@ -13,16 +12,11 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = rootProject.libs.plugins.kotlin.jvm.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.dokka.get().pluginId)
 
-    group = property("publishGroupId").toString()
-    version = property("publishVersion").toString()
-
-    tasks.withType<DokkaTaskPartial>().configureEach {
-        dokkaSourceSets.configureEach {
-            includes.from("README.md")
-        }
-    }
+    group = property("GROUP").toString()
+    version = property("VERSION_NAME").toString()
 }
 
 tasks.withType<DokkaMultiModuleTask>().configureEach {

@@ -1,10 +1,5 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
     application
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -17,12 +12,6 @@ dependencies {
 
 application {
     mainClass = "net.gouline.kapsule.demo.DemoKt"
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
 }
 
 tasks.named<Test>("test") {

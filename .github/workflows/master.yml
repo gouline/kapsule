@@ -9,7 +9,7 @@ on:
       - created
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -48,7 +48,7 @@ jobs:
 
       - name: Publish to Sonatype
         env:
-          ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
+          ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.release.tag_name }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
