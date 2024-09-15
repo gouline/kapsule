@@ -81,8 +81,6 @@ jobs:
           cache: gradle
 
       - name: Export docs
-        env:
-          ORG_GRADLE_PROJECT_publishVersion: ${{ github.event.release.tag_name }}
         run: ./gradlew dokkaHtmlMultiModule
 
       - name: Setup Pages
