@@ -1,6 +1,6 @@
 # Kapsule 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gouline/molot/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gouline/molot/blob/main/LICENSE)
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://gouline.github.io/kapsule/)
 
 Minimalist dependency injection library for Kotlin.

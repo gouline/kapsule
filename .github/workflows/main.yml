@@ -1,9 +1,9 @@
-name: master
+name: main
 
 on:
   push:
     branches:
-      - master
+      - main
   release:
     types:
       - created
@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "master"
+  group: "main"
   cancel-in-progress: false
 
 jobs:
